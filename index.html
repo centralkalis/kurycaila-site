@@ -565,19 +565,23 @@ function captureLead(etapa){
   try{
     if(!LEAD_ENDPOINT||LEAD_ENDPOINT.indexOf('http')!==0)return;
     if(leadEnviado)return; leadEnviado=true;
-    const prio=answers.urgencia==='urgente'?'Urgente':answers.urgencia==='preocupante'?'Preciso resolver logo':(answers.urgencia?'Sem pressa':'');
+    const critico=(answers.violencia==='sim')||!!answers.seguranca||answers.flags==='gravida'||answers.flags==='assedio';
+    const prioridade=critico?'CRITICO':(answers.urgencia==='urgente'?'URGENTE':'NORMAL');
+    const violencia=(answers.violencia==='sim'||answers.seguranca)?'Sim':'Não';
     const tags=[];
-    if(answers.violencia==='sim')tags.push('CRITICO: violencia');
-    if(answers.seguranca)tags.push('CRITICO: seguranca');
-    if(answers.flags==='gravida')tags.push('CRITICO: gravida');
-    if(answers.flags==='assedio')tags.push('CRITICO: assedio');
-    if(answers.flags==='acidente')tags.push('acidente/doenca no trabalho');
-    if(answers.urgencia==='urgente')tags.push('PRIORIDADE: urgente');
+    if(answers.violencia==='sim')tags.push('violência/ameaça');
+    if(answers.seguranca)tags.push('segurança/perigo');
+    if(answers.flags==='gravida')tags.push('estava grávida');
+    if(answers.flags==='assedio')tags.push('assédio');
+    if(answers.flags==='acidente')tags.push('acidente/doença no trabalho');
+    if(answers.urgencia==='urgente')tags.push('quer resolver com urgência');
+    else if(answers.urgencia==='preocupante')tags.push('quer resolver logo');
+    const pontos={gravida:'Estava grávida',assedio:'Sofreu assédio',acidente:'Acidente ou doença no trabalho'}[answers.flags]||'';
     const qp=new URLSearchParams(location.search);
     const payload={
+      prioridade:prioridade, violencia:violencia,
       nome:answers.nome||'', area:(AREA_LABEL[answers.area]||answers.area||''),
-      cidade:answers.local||'', prioridade:prio, tags:tags.join(' | '),
-      violencia:answers.violencia==='sim'?'sim':'', flags:(answers.flags&&answers.flags!=='nenhuma')?answers.flags:'',
+      cidade:answers.local||'', etiquetas:tags.join(' | '), pontos:pontos,
       situacao:answers.estagio||'', relato:answers.relato||'',
       detalhe:answers.regime||answers.ponto||answers.sub||'',
       origem:qp.get('q')?'anuncio':'organico', parametros:location.search||'',
