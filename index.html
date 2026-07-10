@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kury Caila — Advocacia para Mulheres</title>
+<meta name="description" content="Advocacia dedicada a mulheres e suas famílias. Escuta, discrição e estratégia para o que afeta você e quem você ama. Atendimento on-line em todo o Brasil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#170a10; --bg2:#100710; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+    --ivory:#f4ece9; --muted:#b39aa2; --faint:#7a6570;
+    --gold:#e0b58f; --gold-hi:#f2d3bf; --rose:#d98fa0; --ice:#c99aad;
+    --line:rgba(255,255,255,.1); --sb:80px;
+    --glowc:224, 181, 143; --glow2:217, 143, 160; --icec:200, 150, 170;
+    --shell:rgba(23,10,16,.72); --shell2:rgba(23,10,16,.5);
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost",system-ui,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  body.theme-gold{--bg:#0b0910;--bg2:#080610;--ivory:#eef0f4;--muted:#9aa1b0;--faint:#6b6f7e;--gold:#d9b877;--gold-hi:#f0d8a3;--rose:#c98ba0;--ice:#9fb6c9;--glowc:217, 184, 119;--glow2:201, 139, 160;--icec:159, 182, 201;--shell:rgba(11,9,16,.72);--shell2:rgba(11,9,16,.5);}
+  body.theme-mid{--bg:#0a0f1a;--bg2:#070b14;--ivory:#eef2f7;--muted:#9aa6b8;--faint:#66748a;--gold:#a9c7de;--gold-hi:#dcebf6;--rose:#c99aa8;--ice:#8fb4d6;--glowc:120, 170, 210;--glow2:150, 130, 200;--icec:130, 165, 205;--shell:rgba(10,15,26,.72);--shell2:rgba(10,15,26,.5);}
+  body.theme-emerald{--bg:#0b1512;--bg2:#08100d;--ivory:#eef3ef;--muted:#9ab0a5;--faint:#6a7d73;--gold:#d9b877;--gold-hi:#f0d8a3;--rose:#7fb59a;--ice:#8fbfae;--glowc:217, 184, 119;--glow2:120, 180, 150;--icec:150, 190, 170;--shell:rgba(11,21,18,.72);--shell2:rgba(11,21,18,.5);}
+  body.theme-light{--bg:#fbfafc;--bg2:#f3e7ec;--ivory:#231018;--muted:#7c6470;--faint:#b0a2aa;--gold:#8f2f4a;--gold-hi:#b3546c;--rose:#a53d59;--ice:#9a6d7c;--line:rgba(143,47,74,.15);--panel:#ffffff;--panel2:#faf1f4;--glowc:143, 47, 74;--glow2:184, 137, 47;--icec:160, 120, 135;--shell:rgba(255,255,255,.87);--shell2:rgba(255,255,255,.74);}
+  body.theme-light{background:linear-gradient(180deg,#ffffff,#f3e7ec)}
+  body.theme-light .grain{opacity:.015}
+  body.theme-light .shimmer{background:none;-webkit-text-fill-color:var(--gold);color:var(--gold)}
+  body.theme-light .btn-gold{color:#fff}
+  body.theme-light .sb-logo,body.theme-light .sres .si,body.theme-light .sres .si svg{color:#b8892f}
+  body.theme-light .hud::before,body.theme-light .hud::after{border-color:#b8892f;opacity:.6}
+  body.theme-light .map-badge .mini path{fill:#b8892f}
+  body.theme-light .live .br-amulet path{fill:#b8892f}
+  body.theme-light .tcard,body.theme-light .tile,body.theme-light .valcard,body.theme-light .flow-step,
+  body.theme-light .bx,body.theme-light .reach,body.theme-light .feature,body.theme-light .faq details,
+  body.theme-light .ctastrip,body.theme-light .search-res,body.theme-light aside{box-shadow:0 24px 60px -34px rgba(143,47,74,.42)}
+  body.theme-light .tile:hover,body.theme-light .valcard:hover,body.theme-light .flow-step:hover,
+  body.theme-light .tcard:hover,body.theme-light .bx:hover{box-shadow:0 36px 74px -32px rgba(143,47,74,.55)}
+  body.theme-light .map svg .br{fill:rgba(143,47,74,.05);stroke:rgba(143,47,74,.42)}
+  body.theme-light .map svg .cline{stroke:rgba(143,47,74,.34)}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ivory);background:var(--bg);line-height:1.6;font-weight:300;overflow-x:hidden;transition:background .5s,color .5s}
+  body.lock{overflow:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.05}
+  a{color:inherit;text-decoration:none;cursor:pointer}
+  .mono{font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--ice)}
+  .shimmer{background:linear-gradient(100deg,var(--gold) 20%,var(--gold-hi) 45%,#fff 50%,var(--gold-hi) 55%,var(--gold) 80%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:sh 5s linear infinite}
+  @keyframes sh{to{background-position:-200% center}}
+
+  .btn{position:relative;display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:3px;font-family:var(--sans);font-weight:400;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:transform .3s,box-shadow .3s,border-color .3s,color .3s;border:1px solid transparent;will-change:transform}
+  .btn-gold{background:linear-gradient(120deg,var(--gold),var(--gold-hi));color:#2a1418}
+  .btn-gold:hover{box-shadow:0 16px 46px -14px rgba(var(--glowc),.6)}
+  .btn-line{border-color:var(--line);color:var(--ivory)}
+  .btn-line:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-wa{background:#25D366;color:#04180d;border:none}
+  .btn-wa:hover{box-shadow:0 16px 46px -14px rgba(37,211,102,.5)}
+
+  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(var(--icec),.05) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--icec),.05) 1px,transparent 1px);
+    background-size:64px 64px;-webkit-mask:radial-gradient(circle at 55% 35%,#000,transparent 82%);mask:radial-gradient(circle at 55% 35%,#000,transparent 82%)}
+  .grain{position:fixed;inset:0;z-index:6;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .cglow{position:fixed;top:0;left:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(var(--glowc),.1),rgba(var(--glow2),.04) 42%,transparent 70%);opacity:0;transition:opacity .5s}
+  @media(pointer:fine){.cglow{opacity:1}}
+  .orb{position:absolute;border-radius:50%;filter:blur(85px);pointer-events:none;z-index:0;will-change:transform}
+  .orb.gold{background:rgba(var(--glowc),.16)} .orb.rose{background:rgba(var(--glow2),.15)}
+
+  .rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.19,1,.22,1),transform 1s cubic-bezier(.19,1,.22,1)}
+  .rv.in{opacity:1;transform:none}
+  .hud{position:relative}
+  .hud::before,.hud::after{content:"";position:absolute;width:11px;height:11px;opacity:.45;transition:.3s}
+  .hud::before{top:12px;left:12px;border-left:1px solid var(--gold);border-top:1px solid var(--gold)}
+  .hud::after{bottom:12px;right:12px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+  .hud:hover::before,.hud:hover::after{opacity:.9}
+
+  aside{position:fixed;top:0;left:0;bottom:0;width:var(--sb);z-index:40;background:var(--shell);backdrop-filter:blur(16px);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:22px 0}
+  .sb-logo{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:34px;letter-spacing:1px}
+  .sb-nav{display:flex;flex-direction:column;gap:4px;flex:1}
+  .sb-item{width:52px;height:50px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);transition:.25s;position:relative}
+  .sb-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .sb-item span{font-size:.5rem;letter-spacing:.5px;text-transform:uppercase}
+  .sb-item:hover,.sb-item.on{color:var(--gold);background:rgba(var(--glowc),.1)}
+  .sb-bottom{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .sb-wa{width:44px;height:44px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+  .status{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:bl 2s infinite}
+  @keyframes bl{50%{opacity:.4}}
+  @media(max-width:760px){
+    aside{flex-direction:row;top:auto;bottom:0;right:0;width:auto;height:62px;padding:0 6px;border-right:none;border-top:1px solid var(--line);justify-content:space-between;align-items:center}
+    .sb-logo{margin:0;font-size:1.1rem}
+    .sb-nav{flex-direction:row;flex:0;gap:0}.sb-item{width:auto;padding:0 8px;height:52px}.sb-item span{font-size:.44rem}
+    .sb-bottom{flex-direction:row;gap:6px}.status{display:none}.sb-wa{width:40px;height:40px;font-size:1.1rem}
+  }
+
+  main{margin-left:var(--sb);position:relative;z-index:2}
+  @media(max-width:760px){main{margin-left:0;margin-bottom:64px}}
+  .topbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 34px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;background:var(--shell2);backdrop-filter:blur(14px)}
+  .topbar .brand-mono{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;display:inline-flex;align-items:center}
+  .brand-mono .sep{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold);margin:0 9px;vertical-align:middle;flex-shrink:0}
+  .search-wrap{position:relative;flex:1 1 260px;min-width:200px;max-width:560px}
+  .search-wrap .sic{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.7;pointer-events:none}
+  .search-wrap input{width:100%;padding:11px 16px 11px 42px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ivory);font-family:var(--sans);font-weight:300;font-size:.86rem;outline:none;transition:.2s}
+  .search-wrap input::placeholder{color:var(--faint)}
+  .search-wrap input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--glowc),.12)}
+  .search-res{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--shell);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:none;z-index:45;box-shadow:0 30px 70px -34px rgba(0,0,0,.55)}
+  .search-res.open{display:block;animation:optIn .25s ease}
+  .sres{display:flex;gap:13px;align-items:center;padding:14px 16px;cursor:pointer;transition:.2s;border-bottom:1px solid var(--line)}
+  .sres:last-child{border-bottom:none}
+  .sres:hover{background:rgba(var(--glowc),.1)}
+  .sres .si{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:1rem}
+  .sres .si svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.4}
+  .sres b{display:block;font-family:var(--sans);font-weight:500;font-size:.86rem;color:var(--ivory)}
+  .sres small{color:var(--muted);font-size:.74rem}
+  .tb-right{display:flex;align-items:center;gap:16px;margin-left:auto}
+  .live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+  .live .br-amulet{width:15px;height:16px;flex-shrink:0}
+  .live .br-amulet svg{width:100%;height:100%;overflow:visible}
+  .live .br-amulet path{fill:var(--gold);animation:shine 3s ease-in-out infinite}
+  .themebar{display:flex;gap:8px;align-items:center}
+  .theme-toggle{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);cursor:pointer;padding:0;transition:transform .3s,border-color .3s,box-shadow .3s;background:linear-gradient(90deg,#2a0f16 0 50%,#f2e6eb 50% 100%);box-shadow:inset 0 0 0 2px var(--bg)}
+  .theme-toggle:hover{transform:scale(1.12) rotate(180deg);border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--bg),0 0 12px -2px rgba(var(--glowc),.6)}
+  .tdot{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);cursor:pointer;transition:.2s;padding:0}
+  .tdot:hover{transform:scale(1.15)} .tdot.on{outline:2px solid var(--gold);outline-offset:2px}
+  .t1{background:linear-gradient(135deg,#0b0910 45%,#d9b877 45%)}
+  .t2{background:linear-gradient(135deg,#0a0f1a 45%,#a9c7de 45%)}
+  .t3{background:linear-gradient(135deg,#0b1512 45%,#d9b877 45%)}
+  .t4{background:linear-gradient(135deg,#170a10 45%,#e0b58f 45%)}
+  .t5{background:linear-gradient(135deg,#e9e7ec 45%,#a97e46 45%)}
+  @media(max-width:760px){.topbar{padding:11px 16px;gap:10px}.topbar .brand-mono{max-width:38vw;font-size:.54rem}.search-wrap{order:3;flex:1 1 100%;max-width:none}.tb-right{margin-left:auto;gap:10px}.live .live-txt{display:none}.tdot{width:16px;height:16px}.themebar{gap:6px}}
+  @media(max-width:760px){aside .status{display:flex}aside .status .mono{display:none}}
+
+  .pad{padding:34px}
+  @media(max-width:760px){.pad{padding:18px}}
+
+  .feature{position:relative;min-height:84vh;border-radius:20px;overflow:hidden;display:flex;align-items:flex-end;
+    background:radial-gradient(700px 500px at 78% 12%,rgba(var(--glowc),.16),transparent),radial-gradient(600px 500px at 10% 90%,rgba(var(--glow2),.14),transparent),var(--bg2);border:1px solid var(--line)}
+  .feature .orb.o1{width:520px;height:520px;top:-160px;right:-120px}
+  .feature .fbody{position:relative;z-index:2;padding:56px;max-width:780px}
+  @media(max-width:760px){.feature{min-height:82vh}.feature .fbody{padding:28px}}
+  .feature .label{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px}
+  .feature h1{font-size:clamp(2.7rem,6.6vw,5.2rem);font-weight:500;line-height:.98;margin-bottom:20px}
+  .feature h1 em{font-style:italic}
+  .feature p{color:var(--muted);font-size:clamp(1.02rem,2vw,1.3rem);max-width:600px;margin-bottom:16px;font-family:var(--serif);font-style:italic}
+  .feature .subline{color:var(--faint);font-family:var(--sans);font-style:normal;font-size:.94rem;margin-bottom:32px;max-width:560px;letter-spacing:.2px;line-height:1.7}
+  .feature .fcta{display:flex;gap:14px;flex-wrap:wrap}
+  .scanline{position:absolute;left:0;right:0;height:140px;background:linear-gradient(rgba(var(--glowc),.06),transparent);z-index:1;animation:scan 7s ease-in-out infinite}
+  @keyframes scan{0%,100%{top:-140px}50%{top:100%}}
+
+  .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  @media(max-width:760px){.trust{grid-template-columns:repeat(2,1fr)}}
+  .tcard{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+  .tcard .ti{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .tcard .ti svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.4}
+  .tcard h4{font-family:var(--sans);font-weight:500;font-size:.82rem;letter-spacing:.5px;margin-bottom:5px}
+  .tcard p{color:var(--muted);font-size:.78rem}
+
+  .rail-head{display:flex;align-items:flex-end;justify-content:space-between;margin:56px 4px 14px}
+  .rail-head h2{font-size:1.9rem;font-weight:500}
+  .rail-head .sub{color:var(--muted);font-size:.88rem;margin-top:4px;max-width:540px}
+  .rail-wrap{position:relative}
+  .rail{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:6px 4px 16px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .rail::-webkit-scrollbar{display:none}
+  .tile{scroll-snap-align:start;flex:0 0 280px;min-height:248px;border-radius:16px;padding:26px 24px 24px;background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);cursor:pointer;transition:.35s;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  @media(max-width:760px){.tile{flex-basis:236px;min-height:230px}}
+  .tile::before{content:"";position:absolute;inset:0;background:radial-gradient(300px 160px at 50% -10%,rgba(var(--glowc),.16),transparent);opacity:0;transition:.35s}
+  .tile:hover{transform:translateY(-8px);border-color:rgba(var(--glowc),.45);box-shadow:0 30px 60px -30px rgba(var(--glowc),.35)}
+  .tile:hover::before{opacity:1}
+  .tile .tico{width:46px;height:46px;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:auto;position:relative;z-index:1;transition:.35s}
+  .tile .tico svg{width:23px;height:23px;stroke:var(--gold);fill:none;stroke-width:1.3}
+  .tile:hover .tico{border-color:var(--gold);background:rgba(var(--glowc),.12)}
+  .tile h3{font-size:1.5rem;font-weight:500;margin:18px 0 8px;position:relative;z-index:1}
+  .tile p{font-size:.85rem;color:var(--muted);position:relative;z-index:1}
+  .tile .go{margin-top:14px;font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ice);display:flex;align-items:center;gap:6px;position:relative;z-index:1;opacity:.7;transition:.3s}
+  .tile:hover .go{opacity:1;color:var(--gold)}
+  .arrows{display:flex;gap:8px}
+  .arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ivory);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
+  .arrow:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:760px){.arrows{display:none}}
+  .swipe-cue{display:none}
+  @media(max-width:760px){
+    .swipe-cue{display:flex;position:absolute;top:calc(50% - 14px);right:4px;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--shell);backdrop-filter:blur(8px);align-items:center;justify-content:center;z-index:6;cursor:pointer;animation:swipecue 1.9s ease-in-out infinite}
+    .swipe-cue svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:2.2}
+  }
+  @keyframes swipecue{0%,100%{transform:translateY(-50%) translateX(2px);opacity:.7}50%{transform:translateY(-50%) translateX(-4px);opacity:1}}
+
+  /* MAPA */
+  .reach{margin-top:56px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),var(--panel2));overflow:hidden;display:grid;grid-template-columns:1fr 1.05fr;gap:0}
+  @media(max-width:860px){.reach{grid-template-columns:1fr}}
+  .reach-text{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+  @media(max-width:760px){.reach-text{padding:32px 26px}}
+  .reach-text h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:500;margin:12px 0 14px}
+  .reach-text h2 em{font-style:italic}
+  .reach-text p{color:var(--muted);font-size:.98rem;margin-bottom:24px;max-width:430px;line-height:1.7}
+  .reach-stats{display:flex;gap:28px;flex-wrap:wrap}
+  .reach-stat .n{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:var(--gold)}
+  .reach-stat .l{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--faint)}
+  .region-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .region-chips span{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.72rem;letter-spacing:.5px;color:var(--muted);display:inline-flex;align-items:center;gap:7px}
+  .region-chips span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold)}
+  .map{position:relative;aspect-ratio:1/1.05;min-height:460px;border-left:1px solid var(--line);background:radial-gradient(460px 420px at 52% 52%,rgba(var(--glowc),.07),transparent)}
+  @media(max-width:860px){.map{border-left:none;border-top:1px solid var(--line);aspect-ratio:1/1;min-height:auto}}
+  .map svg.lines{position:absolute;inset:0;width:100%;height:100%}
+  .map svg .br{fill:rgba(var(--glowc),.06);stroke:rgba(var(--glowc),.32);stroke-width:.5;stroke-linejoin:round;transition:.5s}
+  .map svg .cline{stroke:rgba(var(--glowc),.28);stroke-width:.25}
+  .node{position:absolute;transform:translate(-50%,-50%);z-index:2}
+  .node .pt{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);cursor:pointer;position:relative;transition:.25s}
+  .node .pt::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold);opacity:0;animation:ripple 3s ease-out infinite}
+  .node:hover .pt{transform:scale(1.5)}
+  .node .lbl{position:absolute;left:13px;top:-7px;font-family:var(--mono);font-size:.54rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);white-space:nowrap;opacity:0;transition:.25s;pointer-events:none}
+  .node:hover .lbl{opacity:1;color:var(--gold)}
+  .node.hub .pt{width:14px;height:14px;background:var(--gold-hi);box-shadow:0 0 22px var(--gold-hi)}
+  .node.hub .pt::after{animation:ripple 2.4s ease-out infinite}
+  .node.hub .pt::before{content:"";position:absolute;inset:-13px;border-radius:50%;border:1px solid var(--gold);opacity:0;animation:ripple 2.4s ease-out .8s infinite}
+  .node.hub .lbl{opacity:1;color:var(--gold-hi);font-size:.58rem}
+  @keyframes ripple{0%{transform:scale(.6);opacity:.8}100%{transform:scale(2.4);opacity:0}}
+  .map-badge{position:absolute;bottom:18px;left:18px;z-index:3;display:inline-flex;align-items:center;gap:9px;background:var(--shell);border:1px solid var(--line);border-radius:99px;padding:8px 15px;font-family:var(--mono);font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:var(--ivory)}
+  .map-badge .mini{width:15px;height:16px;flex-shrink:0}
+  .map-badge .mini svg{width:100%;height:100%;overflow:visible}
+  .map-badge .mini path{fill:var(--gold);animation:shine 3s ease-in-out infinite}
+  @keyframes shine{0%,100%{opacity:.55;filter:drop-shadow(0 0 1px rgba(var(--glowc),.5))}50%{opacity:1;filter:drop-shadow(0 0 5px rgba(var(--glowc),.9))}}
+  /* botão flutuante de contato: advogada + "fale comigo" */
+  .contact-fab{position:fixed;bottom:24px;right:24px;z-index:95;display:inline-flex;align-items:center;gap:11px;background:linear-gradient(120deg,var(--gold),var(--gold-hi));color:#2a1418;padding:9px 20px 9px 9px;border-radius:999px;box-shadow:0 16px 40px -12px rgba(var(--glowc),.6);cursor:pointer;transition:.3s;animation:fabpulse 3.5s ease-in-out infinite}
+  @keyframes fabpulse{0%,100%{box-shadow:0 16px 40px -12px rgba(var(--glowc),.55)}50%{box-shadow:0 16px 52px -8px rgba(var(--glowc),.85)}}
+  .contact-fab:hover{transform:translateY(-3px)}
+  .contact-fab .av{width:42px;height:42px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .contact-fab .av svg{width:25px;height:25px;stroke:var(--gold-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .contact-fab span{font-family:var(--sans);font-weight:500;font-size:.82rem;letter-spacing:.3px;white-space:nowrap}
+  body.theme-light .contact-fab{color:#fff} body.theme-light .contact-fab .av svg{stroke:#b8892f}
+  @media(max-width:760px){.contact-fab{bottom:74px;right:14px;padding:8px;gap:0}.contact-fab span{display:none}.contact-fab .av{width:40px;height:40px}}
+  /* descrição nas opções do quiz */
+  .opt .txt b{font-family:var(--sans);font-weight:500;display:block;line-height:1.3}
+  .opt .txt small{display:block;color:var(--muted);font-size:.77rem;margin-top:3px;line-height:1.4}
+
+  /* PROCESSO */
+  .sec-title{margin:66px 4px 26px}
+  .sec-title h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:500}
+  .sec-title .sub{color:var(--muted);font-size:.9rem;margin-top:5px;max-width:540px}
+  .flow{display:flex;align-items:stretch;flex-wrap:nowrap}
+  @media(max-width:760px){.flow{flex-direction:column}}
+  .flow-step{flex:1;background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:34px 28px;position:relative;overflow:hidden;transition:.35s}
+  .flow-step::before{content:"";position:absolute;inset:0;background:radial-gradient(300px 150px at 50% -20%,rgba(var(--glowc),.14),transparent);opacity:0;transition:.35s}
+  .flow-step:hover{transform:translateY(-6px);border-color:rgba(var(--glowc),.4)}
+  .flow-step:hover::before{opacity:1}
+  .flow-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;position:relative;z-index:1}
+  .flow-ico{width:48px;height:48px;border-radius:13px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.35s}
+  .flow-ico svg{width:23px;height:23px;stroke:var(--gold);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+  .flow-step:hover .flow-ico{border-color:var(--gold);background:rgba(var(--glowc),.12)}
+  .flow-num{font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--ice);text-transform:uppercase}
+  .flow-step h3{font-size:1.5rem;font-weight:500;margin-bottom:9px;position:relative;z-index:1}
+  .flow-step p{color:var(--muted);font-size:.9rem;position:relative;z-index:1;line-height:1.65}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 4px;flex:0 0 46px}
+  .flow-arrow svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.4;opacity:.7}
+  .flow-arrow .dash{stroke-dasharray:3 3;animation:flowd 1.4s linear infinite}
+  @keyframes flowd{to{stroke-dashoffset:-12}}
+  @media(max-width:760px){.flow-arrow{flex:0 0 auto;padding:12px 0}.flow-arrow svg{transform:rotate(90deg)}}
+
+  /* VALORES */
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.values{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.values{grid-template-columns:1fr}}
+  .valcard{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:32px 28px;transition:.35s;position:relative;overflow:hidden}
+  .valcard::before{content:"";position:absolute;inset:0;background:radial-gradient(300px 160px at 50% -20%,rgba(var(--glowc),.14),transparent);opacity:0;transition:.35s}
+  .valcard:hover{transform:translateY(-6px);border-color:rgba(var(--glowc),.4)}
+  .valcard:hover::before{opacity:1}
+  .valcard .vi{width:46px;height:46px;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1;transition:.35s}
+  .valcard .vi svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+  .valcard:hover .vi{border-color:var(--gold);background:rgba(var(--glowc),.12)}
+  .valcard h3{font-size:1.35rem;font-weight:500;margin-bottom:9px;position:relative;z-index:1}
+  .valcard p{color:var(--muted);font-size:.88rem;position:relative;z-index:1;line-height:1.65}
+
+  /* BENTO */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.bento{grid-template-columns:1fr}}
+  .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
+  .bx .mono{margin-bottom:14px;display:block}
+  .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
+  .bx p{color:var(--muted);font-size:.9rem;line-height:1.7}
+  .bx.about{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+  .bx.about .portrait{flex:1;min-height:220px;border-radius:12px;margin-bottom:20px;background:linear-gradient(150deg,rgba(var(--glow2),.4),var(--bg2));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-style:italic;font-size:4rem;position:relative;overflow:hidden}
+  .bx.about .portrait::after{content:"";position:absolute;inset:0;background:radial-gradient(240px 240px at 30% 20%,rgba(var(--glowc),.18),transparent)}
+  .bx.quote{grid-column:span 2;display:flex;align-items:center;background:radial-gradient(500px 300px at 50% 120%,rgba(var(--glow2),.14),transparent),linear-gradient(160deg,var(--panel),var(--panel2))}
+  .bx.quote h3{font-style:italic;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:400;line-height:1.35}
+  .bx.quote em{color:var(--gold)}
+  .bx .stat{font-family:var(--serif);font-size:2.6rem;color:var(--gold);font-style:italic}
+  .bx .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .bx .chips span{font-size:.7rem;border:1px solid var(--line);border-radius:99px;padding:4px 11px;color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:0 auto}
+  .faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:12px;overflow:hidden;transition:.3s}
+  .faq details[open]{border-color:rgba(var(--glowc),.35)}
+  .faq summary{padding:20px 24px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-family:var(--serif);font-size:1.25rem;color:var(--ivory)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--gold);font-size:1.5rem;transition:.3s}
+  .faq details[open] summary::after{content:"–"}
+  .faq .ans{padding:0 24px 22px;color:var(--muted);font-size:.94rem;line-height:1.7}
+
+  .ctastrip{margin-top:66px;border-radius:18px;border:1px solid rgba(var(--glowc),.25);background:radial-gradient(600px 300px at 50% 120%,rgba(var(--glowc),.12),transparent),linear-gradient(160deg,var(--panel),var(--panel2));padding:64px 40px;text-align:center;position:relative;overflow:hidden}
+  .ctastrip h2{font-size:clamp(2rem,4.5vw,3rem);font-weight:500;margin-bottom:14px}
+  .ctastrip h2 em{font-style:italic}
+  .ctastrip p{color:var(--muted);max-width:540px;margin:0 auto 28px;line-height:1.7}
+  .ctastrip .fcta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  footer{padding:52px 34px 30px;border-top:1px solid var(--line);margin-top:44px;color:var(--muted)}
+  footer .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:34px;margin-bottom:30px}
+  @media(max-width:720px){footer .cols{grid-template-columns:1fr;gap:22px}}
+  footer h4{color:var(--gold);font-size:.62rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;font-weight:400}
+  footer p{margin-bottom:7px;font-weight:300;font-size:.86rem}
+  footer a:hover{color:var(--gold)}
+  .disc{border-top:1px solid var(--line);padding-top:22px;font-size:.71rem;color:var(--faint);line-height:1.7}
+
+  /* TRIAGEM */
+  #intake{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;overflow:hidden;
+    background:radial-gradient(1000px 700px at 50% 4%,rgba(var(--glowc),.13),transparent),radial-gradient(700px 640px at 88% 104%,rgba(var(--glow2),.12),transparent),var(--bg)}
+  #intake.open{display:flex}
+  #intake .orb.o1{width:560px;height:560px;top:-180px;right:-140px}
+  #intake .orb.o2{width:440px;height:440px;bottom:-170px;left:-120px}
+  .in-top{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:24px 30px}
+  .in-badge{font-family:var(--mono);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint);display:inline-flex;align-items:center;gap:8px}
+  .in-badge svg{width:12px;height:12px;stroke:var(--gold);fill:none;stroke-width:1.6}
+  .in-close{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.25s;font-size:1.1rem}
+  .in-close:hover{border-color:var(--gold);color:var(--gold)}
+  .in-skip{font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:1px solid transparent;padding-bottom:2px;transition:.25s}
+  .in-skip:hover{color:var(--gold);border-color:var(--gold)}
+  @media(max-width:520px){.in-skip{display:none}}
+  .in-body{position:relative;z-index:5;flex:1;min-height:0;display:flex;align-items:safe center;justify-content:safe center;overflow-y:auto;padding:34px 30px 48px}
+  .card{width:100%;max-width:700px;text-align:center}
+  .ring{width:84px;height:84px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.9rem;color:var(--gold);margin:6px auto 26px;position:relative;box-shadow:0 0 40px -16px rgba(var(--glowc),.4)}
+  .ring::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(var(--glowc),.22);animation:pulse 3.6s ease-in-out infinite}
+  @keyframes pulse{50%{transform:scale(1.09);opacity:.35}}
+  .welcome{animation:rise 1s cubic-bezier(.19,1,.22,1)}
+  .welcome h1{font-size:clamp(2.3rem,6vw,3.8rem);margin-bottom:18px;font-weight:500}
+  .welcome p{color:var(--muted);font-size:1.08rem;max-width:500px;margin:0 auto 34px;line-height:1.7}
+  .start-actions{display:flex;flex-direction:column;align-items:center;gap:18px}
+  .reassure{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  .reassure svg{width:12px;height:12px;stroke:var(--gold);fill:none;stroke-width:1.6}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}}
+  .prog-wrap{margin-bottom:40px}
+  .progress{height:2px;background:var(--line);border-radius:99px;overflow:hidden}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--rose),var(--gold-hi));width:0;transition:width .6s cubic-bezier(.4,0,.1,1);box-shadow:0 0 12px rgba(var(--glowc),.6)}
+  .prog-note{margin-top:11px;font-family:var(--mono);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;justify-content:center;gap:7px}
+  .prog-note svg{width:11px;height:11px;stroke:var(--gold);fill:none;stroke-width:1.6}
+  .step{animation:rise .6s cubic-bezier(.19,1,.22,1)}
+  .step .kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:3px;text-transform:uppercase;color:var(--ice);margin-bottom:16px;display:block}
+  .step h2{font-size:clamp(1.9rem,5vw,2.9rem);margin-bottom:14px;font-weight:500}
+  .step .hint{color:var(--muted);font-size:1rem;margin:0 auto 36px;max-width:480px;line-height:1.6}
+  .options{display:grid;grid-template-columns:1fr;gap:12px;text-align:left;max-width:600px;margin:0 auto}
+  .options.two{grid-template-columns:1fr 1fr}
+  @media(max-width:600px){.options.two{grid-template-columns:1fr}}
+  .opt{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px 20px;cursor:pointer;transition:.3s;font-size:.97rem;display:flex;align-items:center;gap:15px;opacity:0;animation:optIn .55s ease forwards;overflow:hidden}
+  @keyframes optIn{to{opacity:1}}
+  .opt .sheen{position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(var(--glowc),.13),transparent);transform:skewX(-18deg);transition:.6s}
+  .opt:hover .sheen{left:130%}
+  .opt:hover{border-color:rgba(var(--glowc),.5);transform:translateY(-3px);box-shadow:0 22px 50px -26px rgba(var(--glowc),.4)}
+  .opt .ico{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s;position:relative;z-index:1}
+  .opt .ico svg{width:21px;height:21px;stroke:var(--gold);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:.3s}
+  .opt:hover .ico{border-color:var(--gold);background:rgba(var(--glowc),.13)}
+  .opt .txt{flex:1;line-height:1.35;position:relative;z-index:1}
+  .opt .check{width:0;overflow:hidden;transition:width .3s;position:relative;z-index:1}
+  .opt .check svg{width:20px;height:20px;stroke:var(--gold-hi);fill:none;stroke-width:1.8}
+  .opt.sel{border-color:var(--gold);background:linear-gradient(120deg,rgba(var(--glowc),.2),rgba(var(--glow2),.1));transform:translateY(-3px)}
+  .opt.sel .ico{border-color:var(--gold);background:rgba(var(--glowc),.22)} .opt.sel .check{width:22px}
+  .field{max-width:460px;margin:0 auto}
+  .field input{width:100%;padding:17px 20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);font-family:var(--serif);font-size:1.35rem;color:var(--ivory);outline:none;transition:.25s;text-align:center}
+  .field input::placeholder{color:var(--faint);font-style:italic}
+  .field input:focus{border-color:var(--gold);box-shadow:0 0 34px -14px rgba(var(--glowc),.5)}
+  .step-actions{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+  .skip{background:none;border:none;color:var(--faint);cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:16px;transition:.25s}
+  .skip:hover{color:var(--gold)}
+  .back{background:none;border:none;color:var(--faint);cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;margin-top:24px;transition:.25s}
+  .back:hover{color:var(--gold)}
+  .summary{background:var(--panel);border:1px solid rgba(var(--glowc),.3);border-radius:18px;padding:38px;text-align:left;max-width:560px;margin:0 auto 24px;box-shadow:0 50px 100px -55px rgba(var(--glowc),.5)}
+  .summary h3{color:var(--gold);font-size:2rem;margin-bottom:16px;font-style:italic;font-weight:500}
+  .summary p{color:var(--muted);font-size:1rem;margin-bottom:12px;line-height:1.7}
+  .summary .rec{background:rgba(var(--glowc),.1);border:1px solid rgba(var(--glowc),.2);border-radius:12px;padding:15px 17px;font-size:.9rem;color:var(--ivory);margin-top:18px;display:flex;gap:11px;align-items:flex-start}
+  .summary .rec svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:2px}
+  .care{background:linear-gradient(120deg,rgba(var(--glow2),.4),var(--bg2));border:1px solid rgba(var(--glow2),.35);border-radius:14px;padding:22px 24px;font-size:.95rem;max-width:560px;margin:0 auto 22px;text-align:left;line-height:1.7}
+  .care b{color:var(--gold-hi)}
+  .care h4{font-size:1.3rem;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div><div class="grain"></div><div class="cglow" id="cglow"></div>
+
+<aside>
+  <div class="sb-logo">KC</div>
+  <nav class="sb-nav">
+    <a class="sb-item on" onclick="scrollToId('top')"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6M6.5 9.5V19h11V9.5"/></svg><span>Início</span></a>
+    <a class="sb-item" onclick="scrollToId('areas')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>Áreas</span></a>
+    <a class="sb-item" onclick="scrollToId('brasil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M12 3v14M5 10h14"/></svg><span>Brasil</span></a>
+    <a class="sb-item" onclick="scrollToId('sobre')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg><span>Sobre</span></a>
+    <a class="sb-item" onclick="openTriage()"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg><span>Orientar</span></a>
+  </nav>
+  <div class="sb-bottom">
+    <div class="status"><span class="dot"></span><span class="mono" style="font-size:.44rem">disponível</span></div>
+    <a class="sb-wa" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">💬</a>
+  </div>
+</aside>
+
+<main id="top">
+  <div class="topbar">
+    <span class="mono brand-mono">DRA. KURY CAILA <span class="sep"></span> ADVOCACIA PARA MULHERES</span>
+    <div class="search-wrap">
+      <svg class="sic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
+      <input id="search" autocomplete="off" placeholder="Com o que você precisa de ajuda? Ex: divórcio, INSS, fui enganada por uma loja..." oninput="onSearch()" onkeydown="if(event.key==='Enter')searchGo()">
+      <div class="search-res" id="searchRes"></div>
+    </div>
+    <div class="tb-right">
+      <span class="live"><span class="br-amulet"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><path d="M36,7 L39,10 L46,13 L55,9 L59,14 L59,20 L63,20 L71,24 L78,25 L84,27 L87,29 L91,31 L92,34 L92,38 L87,43 L84,47 L83,53 L81,58 L80,64 L77,68 L74,70 L70,71 L62,75 L62,80 L59,84 L56,87 L54,93 L51,93 L46,87 L42,86 L45,82 L46,74 L49,75 L41,63 L41,55 L36,49 L25,40 L14,43 L8,39 L6,35 L9,30 L15,28 L16,21 L19,16 L27,13 L29,10 L32,9 Z"/></svg></span> <span class="live-txt">Atendimento em todo o Brasil</span></span>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro / escuro" aria-label="Alternar tema"></button>
+    </div>
+  </div>
+
+  <div class="pad">
+    <section class="feature hud rv">
+      <div class="orb gold o1"></div><div class="scanline"></div>
+      <div class="fbody">
+        <span class="label"><span class="mono">● Advocacia dedicada a mulheres</span></span>
+        <h1>Do seu lado,<br>por <em class="shimmer">inteiro</em></h1>
+        <p>Seja qual for a questão que afeta você ou quem você ama, você não precisa enfrentar isso sozinha.</p>
+        <p class="subline">Advocacia dedicada a mulheres, aos seus filhos e à sua família. Você não precisa entender de leis. Precisa de alguém preparada e presente ao seu lado.</p>
+        <div class="fcta">
+          <a class="btn btn-gold mag" onclick="openTriage()">▶ Entender minha situação</a>
+          <a class="btn btn-line mag" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="tcard rv"><div class="ti"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.4-7 8.8C8 17.4 5 14.4 5 10V6l7-3z"/></svg></div><h4>Sigilo total</h4><p>O que você me conta fica só entre nós.</p></div>
+      <div class="tcard rv" style="transition-delay:.06s"><div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg></div><h4>Dedicada a mulheres</h4><p>Um olhar inteiro para você e sua família.</p></div>
+      <div class="tcard rv" style="transition-delay:.12s"><div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h4>Sempre disponível</h4><p>Comece agora, no seu tempo, sem pressa.</p></div>
+      <div class="tcard rv" style="transition-delay:.18s"><div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M12 3v14M5 10h14"/></svg></div><h4>Todo o Brasil</h4><p>Atendimento on-line, onde você estiver.</p></div>
+    </div>
+
+    <div id="areas">
+      <div class="rail-head rv">
+        <div><span class="mono">Como posso te ajudar</span><h2>Em qual área você precisa de ajuda?</h2><p class="sub">Se afeta a sua vida ou a dos seus filhos, é aqui que começa a se resolver. Toque na área e eu te oriento em um minuto.</p></div>
+        <div class="arrows"><div class="arrow" onclick="railMove(-1)">‹</div><div class="arrow" onclick="railMove(1)">›</div></div>
+      </div>
+      <div class="rail-wrap"><div class="rail" id="rail"></div><button class="swipe-cue" onclick="railMove(1)" aria-label="Ver mais áreas"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+
+    <section id="brasil" class="reach hud rv">
+      <div class="reach-text">
+        <span class="mono">● Presente onde você estiver</span>
+        <h2>Atendimento em <em class="shimmer">todo o Brasil</em></h2>
+        <p>Você não precisa morar em São Paulo nem sair de casa para ter uma advogada dedicada ao seu lado. O atendimento é on-line, seguro e humano, do Norte ao Sul do país.</p>
+        <div class="reach-stats">
+          <div class="reach-stat"><div class="n">26</div><div class="l">Estados + DF</div></div>
+          <div class="reach-stat"><div class="n">100%</div><div class="l">On-line</div></div>
+          <div class="reach-stat"><div class="n">24h</div><div class="l">Para começar</div></div>
+        </div>
+        <div class="region-chips"><span>Norte</span><span>Nordeste</span><span>Centro-Oeste</span><span>Sudeste</span><span>Sul</span></div>
+      </div>
+      <div class="map" id="map">
+        <svg class="lines" id="mapLines" preserveAspectRatio="none"></svg>
+        <div class="map-badge"><span class="mini"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><path d="M36,7 L39,10 L46,13 L55,9 L59,14 L59,20 L63,20 L71,24 L78,25 L84,27 L87,29 L91,31 L92,34 L92,38 L87,43 L84,47 L83,53 L81,58 L80,64 L77,68 L74,70 L70,71 L62,75 L62,80 L59,84 L56,87 L54,93 L51,93 L46,87 L42,86 L45,82 L46,74 L49,75 L41,63 L41,55 L36,49 L25,40 L14,43 L8,39 L6,35 L9,30 L15,28 L16,21 L19,16 L27,13 L29,10 L32,9 Z"/></svg></span> Atendimento em todo o Brasil</div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <div class="sec-title rv"><span class="mono">Simples assim</span><h2>Como funciona?</h2><p class="sub">Do primeiro contato até o seu lado, em três passos. Sem burocracia e sem juridiquês.</p></div>
+    <div class="flow">
+      <div class="flow-step hud rv">
+        <div class="flow-top"><div class="flow-ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg></div><div class="flow-num">Passo 01</div></div>
+        <h3>Você me conta</h3>
+        <p>Aqui pelo site ou no WhatsApp, você compartilha a sua situação. É rápido, sigiloso e sem compromisso nenhum.</p>
+      </div>
+      <div class="flow-arrow rv"><svg viewBox="0 0 24 24"><line class="dash" x1="3" y1="12" x2="18" y2="12"/><path d="M14 7l5 5-5 5"/></svg></div>
+      <div class="flow-step hud rv" style="transition-delay:.1s">
+        <div class="flow-top"><div class="flow-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div><div class="flow-num">Passo 02</div></div>
+        <h3>Eu analiso o seu caso</h3>
+        <p>Estudo a sua situação com atenção e identifico, de um jeito claro, o que pode ser feito e quais são os melhores caminhos para você.</p>
+      </div>
+      <div class="flow-arrow rv" style="transition-delay:.16s"><svg viewBox="0 0 24 24"><line class="dash" x1="3" y1="12" x2="18" y2="12"/><path d="M14 7l5 5-5 5"/></svg></div>
+      <div class="flow-step hud rv" style="transition-delay:.2s">
+        <div class="flow-top"><div class="flow-ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.4-7 8.8C8 17.4 5 14.4 5 10V6l7-3z"/><path d="M9.5 11.5l1.8 1.8 3.6-3.6"/></svg></div><div class="flow-num">Passo 03</div></div>
+        <h3>Cuido de todo o processo</h3>
+        <p>Do início ao fim, assumo tudo e caminho ao seu lado, sempre com atenção à sua vida e à da sua família.</p>
+      </div>
+    </div>
+
+    <!-- VALORES -->
+    <div class="sec-title rv" id="valores"><span class="mono">Como eu trabalho</span><h2>O que você pode esperar de mim?</h2><p class="sub">Antes de qualquer resultado, existe um jeito de cuidar. Este é o meu.</p></div>
+    <div class="values">
+      <div class="valcard hud rv"><div class="vi"><svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4-9-8.2C1.4 8.6 3.2 5.5 6.4 5.5c2 0 3.2 1.2 4.1 2.4l1.5 1.9 1.5-1.9c.9-1.2 2.1-2.4 4.1-2.4 3.2 0 5 3.1 3.4 6.3C18.5 16 12 20 12 20z"/></svg></div><h3>Escuta antes de tudo</h3><p>Ouço a sua história inteira, com calma, antes de falar em qualquer processo.</p></div>
+      <div class="valcard hud rv" style="transition-delay:.06s"><div class="vi"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Sigilo absoluto</h3><p>O que você me conta fica só entre nós, com toda a segurança e conforme a LGPD.</p></div>
+      <div class="valcard hud rv" style="transition-delay:.12s"><div class="vi"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg></div><h3>Sem juridiquês</h3><p>Explico cada etapa de um jeito que você entende de verdade, sem termos difíceis.</p></div>
+      <div class="valcard hud rv" style="transition-delay:.06s"><div class="vi"><svg viewBox="0 0 24 24"><path d="M12 21c-4-3-8-6-8-11a4 4 0 018-1 4 4 0 018 1c0 5-4 8-8 11z"/><path d="M9 12h6"/></svg></div><h3>Presença de verdade</h3><p>Você nunca fica sozinha. Eu respondo, acompanho e caminho ao seu lado.</p></div>
+      <div class="valcard hud rv" style="transition-delay:.12s"><div class="vi"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg></div><h3>Foco na mulher</h3><p>Um olhar dedicado a você, aos seus filhos e à sua família, porque tudo se conecta.</p></div>
+      <div class="valcard hud rv" style="transition-delay:.18s"><div class="vi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div><h3>Transparência</h3><p>Você acompanha cada etapa, prazo e condição, sem surpresas do início ao fim.</p></div>
+    </div>
+
+    <div class="bento">
+      <div class="bx about hud rv" id="sobre">
+        <div class="portrait">KC</div>
+        <span class="mono">Sobre · Dra. Kury Caila</span>
+        <h3>Uma advogada, do seu lado</h3>
+        <p>Sou inscrita na OAB/SP sob o número 520.927 e dedico a minha atuação inteiramente às mulheres. Vejo a mulher antes do processo e entendo que, quando algo afeta você, afeta também os seus filhos e a sua casa. Eu te escuto de verdade, explico tudo sem juridiquês e caminho ao seu lado, com discrição, do começo ao fim.</p>
+      </div>
+      <div class="bx hud rv" style="transition-delay:.08s"><span class="mono">Para quem</span><h3>Você e sua família</h3><p>Mulheres, seus filhos e dependentes. Se a questão toca a sua vida, é aqui que ela começa a se resolver.</p><div class="chips"><span>Mães</span><span>Filhos</span><span>Família</span><span>Você</span></div></div>
+      <div class="bx hud rv" style="transition-delay:.16s"><span class="mono">Confidencial</span><div class="stat">100%</div><p>Sigilo profissional e proteção dos seus dados conforme a LGPD.</p></div>
+      <div class="bx quote hud rv" style="transition-delay:.24s">
+        <h3>"Antes de qualquer processo, existe uma mulher com uma história. É <em>dela</em> que eu cuido primeiro."</h3>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="sec-title rv"><span class="mono">Dúvidas frequentes</span><h2>Perguntas que talvez você tenha</h2></div>
+    <div class="faq rv">
+      <details open><summary>Você atende apenas mulheres?</summary><div class="ans">A minha atuação é dedicada às mulheres, e isso inclui tudo que envolve a sua vida: os seus filhos, os seus dependentes e a sua família. Se a questão afeta você ou quem você ama, é comigo. A ideia é ser um espaço seguro e cuidadoso, pensado para a mulher, do começo ao fim.</div></details>
+      <details><summary>Como funciona o atendimento on-line?</summary><div class="ans">Tudo por vídeo ou mensagem, com total sigilo. Você não precisa sair de casa nem morar em São Paulo. Atendo mulheres de todo o Brasil, no horário que for melhor para você.</div></details>
+      <details><summary>A primeira conversa tem custo?</summary><div class="ans">A orientação inicial aqui do site é gratuita e sem compromisso. Ela serve para eu entender a sua situação. Os valores de uma consulta ou de um caso são conversados de forma transparente, sempre de acordo com o que a OAB permite.</div></details>
+      <details><summary>Vocês cuidam de questões dos meus filhos também?</summary><div class="ans">Sim. Guarda, pensão, alimentos e tudo que envolve o bem-estar dos seus filhos e dependentes faz parte do meu trabalho, porque o que afeta você afeta a sua família.</div></details>
+      <details><summary>Minhas informações ficam em sigilo?</summary><div class="ans">Sempre. O sigilo profissional é um dever da advocacia, e os seus dados são tratados com toda a segurança e conforme a LGPD. O que você me conta fica entre nós.</div></details>
+    </div>
+
+    <section class="ctastrip hud rv">
+      <span class="mono">Quando você estiver pronta</span>
+      <h2 style="margin-top:12px">Vamos resolver isso<br><em class="shimmer">juntas</em></h2>
+      <p>Comece pela orientação inicial, rápida e sigilosa, ou fale comigo agora mesmo. Estou aqui para te ouvir.</p>
+      <div class="fcta">
+        <a class="btn btn-gold mag" onclick="openTriage()">▶ Entender minha situação</a>
+        <a class="btn btn-wa mag" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">Falar no WhatsApp</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="cols">
+        <div><div class="sb-logo" style="margin-bottom:12px">Kury Caila</div><p style="max-width:320px">Advocacia dedicada a mulheres e suas famílias. Escuta, discrição e estratégia, em todo o Brasil.</p></div>
+        <div><h4>Navegação</h4><p><a onclick="openTriage()">Orientação inicial</a></p><p><a onclick="scrollToId('areas')">Áreas</a></p><p><a onclick="scrollToId('brasil')">Atendimento</a></p><p><a onclick="scrollToId('sobre')">Sobre</a></p></div>
+        <div><h4>Contato</h4><p><a onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">WhatsApp</a></p><p><a href="mailto:[SEU_EMAIL]">[SEU_EMAIL]</a></p><p>São Paulo, SP. On-line para todo o Brasil.</p><p>OAB/SP nº 520.927</p></div>
+      </div>
+      <div class="disc">Este site tem caráter meramente informativo, em conformidade com o Provimento nº 205/2021 e o Código de Ética e Disciplina da OAB. O conteúdo e a orientação inicial não constituem oferta de serviços, captação de clientela, promessa de resultado nem análise jurídica de casos específicos, o que ocorre apenas em consulta individual. Os dados são tratados com sigilo e conforme a LGPD. © <span id="year"></span> Kury Caila, Advocacia.</div>
+    </footer>
+  </div>
+</main>
+
+<div id="intake">
+  <div class="orb gold o1"></div><div class="orb rose o2"></div>
+  <div class="in-top">
+    <span class="in-badge"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Orientação inicial · sigilosa</span>
+    <div style="display:flex;align-items:center;gap:16px">
+      <span class="in-skip" onclick="closeTriage()">Ver o escritório →</span>
+      <div class="in-close" onclick="closeTriage()">✕</div>
+    </div>
+  </div>
+  <div class="in-body"><div class="card" id="stepHost"></div></div>
+</div>
+
+<div class="contact-fab" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')" aria-label="Falar com a advogada" role="button">
+  <span class="av"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.2"/><path d="M8.7 6.4C8.7 4.3 10.1 3 12 3s3.3 1.3 3.3 3.4"/><path d="M8.9 8.6C8.2 9.3 7.9 10.3 7.9 11.4M15.1 8.6c.7.7 1 1.7 1 2.8"/><path d="M5.5 20.5c0-3.6 2.9-6.3 6.5-6.3s6.5 2.7 6.5 6.3"/></svg></span>
+  <span>Fale comigo</span>
+</div>
+
+<script>
+const WHATSAPP="551152862826";
+/* Captura de leads → planilha Google (cole a URL do App da Web do Apps Script abaixo) */
+const LEAD_ENDPOINT="COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+let leadEnviado=false;
+function captureLead(etapa){
+  try{
+    if(!LEAD_ENDPOINT||LEAD_ENDPOINT.indexOf('http')!==0)return;
+    if(leadEnviado)return; leadEnviado=true;
+    const prio=answers.urgencia==='urgente'?'Urgente':answers.urgencia==='preocupante'?'Preciso resolver logo':(answers.urgencia?'Sem pressa':'');
+    const tags=[];
+    if(answers.violencia==='sim')tags.push('CRITICO: violencia');
+    if(answers.seguranca)tags.push('CRITICO: seguranca');
+    if(answers.flags==='gravida')tags.push('CRITICO: gravida');
+    if(answers.flags==='assedio')tags.push('CRITICO: assedio');
+    if(answers.flags==='acidente')tags.push('acidente/doenca no trabalho');
+    if(answers.urgencia==='urgente')tags.push('PRIORIDADE: urgente');
+    const qp=new URLSearchParams(location.search);
+    const payload={
+      nome:answers.nome||'', area:(AREA_LABEL[answers.area]||answers.area||''),
+      cidade:answers.local||'', prioridade:prio, tags:tags.join(' | '),
+      violencia:answers.violencia==='sim'?'sim':'', flags:(answers.flags&&answers.flags!=='nenhuma')?answers.flags:'',
+      situacao:answers.estagio||'', relato:answers.relato||'',
+      detalhe:answers.regime||answers.ponto||answers.sub||'',
+      origem:qp.get('q')?'anuncio':'organico', parametros:location.search||'',
+      etapa:etapa||'quiz', pagina:location.href
+    };
+    fetch(LEAD_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  }catch(e){}
+}
+const IC={
+  heart:'<svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4-9-8.2C1.4 8.6 3.2 5.5 6.4 5.5c2 0 3.2 1.2 4.1 2.4l1.5 1.9 1.5-1.9c.9-1.2 2.1-2.4 4.1-2.4 3.2 0 5 3.1 3.4 6.3C18.5 16 12 20 12 20z"/></svg>',
+  kids:'<svg viewBox="0 0 24 24"><circle cx="8" cy="7" r="2.5"/><circle cx="16" cy="8" r="2"/><path d="M4 20v-3a4 4 0 014-4M12 20v-2a3.5 3.5 0 013.5-3.5"/></svg>',
+  shield:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.4-7 8.8C8 17.4 5 14.4 5 10V6l7-3z"/><path d="M9.3 11.5l1.8 1.8 3.6-3.6"/></svg>',
+  scale:'<svg viewBox="0 0 24 24"><path d="M12 4v16M6 20h12M5 8h14M12 5l-6 3M12 5l6 3"/><path d="M5 8l-2.2 4a2.2 2.2 0 004.4 0L5 8zM19 8l-2.2 4a2.2 2.2 0 004.4 0L19 8z"/></svg>',
+  briefcase:'<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6a2 2 0 012-2h2a2 2 0 012 2v2M4 13h16"/></svg>',
+  doc:'<svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9.5 8h5M9.5 12h5M9.5 16h3"/></svg>',
+  home:'<svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6M6.5 9.5V19h11V9.5"/></svg>',
+  compass:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg>',
+  seed:'<svg viewBox="0 0 24 24"><path d="M12 21v-7M12 14c-3 0-5-2-5-5 3 0 5 2 5 5zM12 12c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M8.5 15.5h7"/></svg>',
+  bolt:'<svg viewBox="0 0 24 24"><path d="M13 3L5 13h5l-1 8 8-10h-5l1-8z"/></svg>',
+  files:'<svg viewBox="0 0 24 24"><path d="M8 5h6l3 3v7a1 1 0 01-1 1H8a1 1 0 01-1-1V6a1 1 0 011-1z"/><path d="M14 5v3h3"/></svg>',
+  gavel:'<svg viewBox="0 0 24 24"><path d="M5 19h9M8 8l4 4M6 10l4-4M9 13l4-4M14 8l3 3M11 6l3 3"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4 4 10-10"/></svg>',
+  lock:'<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>',
+  chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg>',
+  ring:'<svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M9 5l3 3 3-3-1.5-2h-3L9 5z"/></svg>',
+};
+
+/* ÁREAS (rótulos p/ resumo e etiquetas do robô) */
+const CAT={
+  familia:{label:"Divórcio e família",frase:"uma questão de família"},
+  filhos:{label:"Guarda e pensão",frase:"uma questão sobre os seus filhos"},
+  previdenciario:{label:"Aposentadoria e INSS",frase:"um direito seu junto ao INSS"},
+  consumidor:{label:"Direito do consumidor",frase:"uma situação de consumo em que você foi prejudicada"},
+  trabalhista:{label:"Direito do trabalho",frase:"uma questão do seu trabalho"},
+  empresarial:{label:"Mulher empreendedora",frase:"uma questão do seu negócio"},
+  protecao:{label:"Proteção e segurança",frase:"uma situação de proteção e segurança"},
+  patrimonio:{label:"Herança e patrimônio",frase:"uma questão de herança ou patrimônio"},
+  descobrir:{label:"Orientação geral",frase:"uma situação que vamos entender melhor juntas"},
+};
+
+/* CARDS da trilha (cada um abre um quiz específico daquela área) */
+const TILES=[
+  {icon:IC.compass,title:"Ainda não sei explicar",desc:"Tudo bem. Vou te ajudar a entender o que você precisa.",area:"descobrir"},
+  {icon:IC.heart,title:"Divórcio e Família",desc:"Separação, guarda, partilha e o recomeço, com segurança e em paz.",area:"familia"},
+  {icon:IC.kids,title:"Guarda e Pensão",desc:"O melhor para os seus filhos: guarda, alimentos e convivência.",area:"filhos"},
+  {icon:IC.doc,title:"Aposentadoria e INSS",desc:"Aposentadoria, benefício negado, BPC e salário-maternidade.",area:"previdenciario"},
+  {icon:IC.scale,title:"Fui Lesada por uma Empresa",desc:"Banco, plano de saúde, loja, golpe ou nome negativado. O que é seu, de volta.",area:"consumidor"},
+  {icon:IC.briefcase,title:"Direito do Trabalho",desc:"Demissão, verbas não pagas, assédio ou trabalho sem registro.",area:"trabalhista"},
+  {icon:IC.home,title:"Mulher Empreendedora",desc:"Contratos, MEI, marca e funcionários. Proteção para o seu negócio.",area:"empresarial"},
+  {icon:IC.shield,title:"Proteção e Segurança",desc:"Medidas de proteção com prioridade e sigilo. Você não está sozinha.",area:"protecao"},
+  {icon:IC.ring,title:"Herança e Patrimônio",desc:"Inventário, partilha e a proteção do seu futuro e da sua família.",area:"patrimonio"},
+];
+
+/* Passos reutilizáveis */
+const S_URG={kicker:"Estou te ouvindo",h:"Como está esse momento para você?",type:"choice",key:"urgencia",options:[
+  {label:"Tranquilo, só quero me informar",value:"tranquila",icon:IC.seed},
+  {label:"Preocupante, preciso resolver logo",value:"preocupante",icon:IC.clock},
+  {label:"Urgente, é uma emergência",value:"urgente",icon:IC.bolt}]};
+const S_EST={kicker:"Quase lá",h:"Você já deu algum passo?",type:"choice",key:"estagio",options:[
+  {label:"Ainda não, quero entender por onde começar",value:"inicio",icon:IC.compass},
+  {label:"Já tenho alguns documentos guardados",value:"documentos",icon:IC.files},
+  {label:"Já existe um processo em andamento",value:"processo",icon:IC.gavel}]};
+const S_NOME={kicker:"Quase terminando",h:"Como você se chama?",hint:"Para eu te chamar pelo nome quando a gente conversar.",type:"text",key:"nome",placeholder:"Seu primeiro nome"};
+const S_LOCAL={kicker:"Por último",h:"De onde você fala comigo?",hint:"Sua cidade e estado. Atendo em todo o Brasil, isso só me ajuda a te orientar melhor.",type:"text",key:"local",placeholder:"Ex: Recife, PE",optional:true};
+
+/* FLUXOS por área */
+const FLOWS={
+  descobrir:{welcome:true,steps:[
+    {kicker:"Vamos com calma",h:"O que te traz aqui hoje?",hint:"Escolha o que mais se parece com a sua situação. Tudo é sigiloso, e eu vou te guiando.",type:"choice",key:"tema",twoCol:true,options:[
+      {label:"Um relacionamento que acabou ou vai acabar",value:"relacionamento",area:"familia",icon:IC.heart},
+      {label:"Uma questão sobre os meus filhos",value:"filhos",area:"filhos",icon:IC.kids},
+      {label:"Minha aposentadoria ou o INSS",value:"inss",area:"previdenciario",icon:IC.doc},
+      {label:"Fui prejudicada por uma empresa, banco ou loja",value:"consumo",area:"consumidor",icon:IC.scale},
+      {label:"Algo do meu trabalho",value:"trabalho",area:"trabalhista",icon:IC.briefcase},
+      {label:"O meu negócio ou a minha empresa",value:"negocio",area:"empresarial",icon:IC.home},
+      {label:"Uma situação que me deixa insegura ou com medo",value:"seguranca",area:"protecao",icon:IC.shield},
+      {label:"Herança, bens ou patrimônio",value:"patrimonio",area:"patrimonio",icon:IC.ring},
+      {label:"Sinceramente, ainda não sei explicar",value:"indefinido",area:"descobrir",icon:IC.compass}]},
+    {kicker:"Me conta um pouco mais",h:"Quer descrever com as suas palavras?",hint:"Escreva à vontade, ou pule esta parte. O que você contar me ajuda a te entender melhor.",type:"text",key:"relato",placeholder:"O que está acontecendo...",optional:true},
+    S_URG,S_NOME,S_LOCAL]},
+  previdenciario:{steps:[
+    {kicker:"Aposentadoria e INSS",h:"Qual é a sua situação com o INSS?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Quero me aposentar",value:"aposentar",icon:IC.doc},
+      {label:"Meu benefício foi negado",value:"negado",icon:IC.bolt},
+      {label:"Auxílio-doença, pensão ou BPC",value:"beneficio",icon:IC.heart},
+      {label:"Salário-maternidade",value:"maternidade",icon:IC.kids}]},
+    S_EST,S_URG,S_NOME,S_LOCAL]},
+  consumidor:{steps:[
+    {kicker:"Direito do consumidor",h:"O que aconteceu com você?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Problema com banco ou financeira",value:"banco",icon:IC.scale},
+      {label:"Plano de saúde negou algo",value:"saude",icon:IC.heart},
+      {label:"Compra, serviço ou cobrança indevida",value:"compra",icon:IC.files},
+      {label:"Golpe ou fraude",value:"golpe",icon:IC.bolt},
+      {label:"Nome negativado ou dívidas",value:"nome",icon:IC.doc},
+      {label:"Outra situação",value:"outro",icon:IC.compass}]},
+    {kicker:"Sobre as provas",h:"Você guardou algo do que aconteceu?",hint:"Contrato, prints, boletos, mensagens. Se não tiver, não tem problema nenhum.",type:"choice",key:"provas",options:[
+      {label:"Sim, tenho os comprovantes",value:"sim",icon:IC.files},
+      {label:"Tenho algumas coisas",value:"parcial",icon:IC.doc},
+      {label:"Não guardei nada",value:"nao",icon:IC.compass}]},
+    S_URG,S_NOME,S_LOCAL]},
+  trabalhista:{steps:[
+    {kicker:"Direito do trabalho",h:"Sobre o que é a sua questão?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Fui demitida ou vou sair",value:"demissao",icon:IC.files},
+      {label:"Não recebi o que era meu",value:"verbas",icon:IC.scale},
+      {label:"Assédio ou discriminação no trabalho",value:"assedio",icon:IC.shield},
+      {label:"Trabalho sem registro",value:"semregistro",icon:IC.briefcase}]},
+    {kicker:"Um panorama do seu caso",h:"Alguma dessas situações se aplica a você?",hint:"Isso pode mudar bastante os seus direitos. Se não for o caso, é só seguir.",type:"choice",twoCol:true,key:"flags",options:[
+      {label:"Eu estava grávida",value:"gravida",icon:IC.kids},
+      {label:"Sofri assédio, moral ou sexual",value:"assedio",icon:IC.shield},
+      {label:"Tive acidente ou doença no trabalho",value:"acidente",icon:IC.heart},
+      {label:"Nenhuma dessas",value:"nenhuma",icon:IC.compass}]},
+    S_URG,S_NOME,S_LOCAL]},
+  empresarial:{steps:[
+    {kicker:"Mulher empreendedora",h:"Como posso ajudar o seu negócio?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Contratos e documentos",value:"contratos",icon:IC.files},
+      {label:"Um cliente ou fornecedor me deu problema",value:"cliente",icon:IC.scale},
+      {label:"Questões com funcionários",value:"funcionarios",icon:IC.briefcase},
+      {label:"Abrir ou regularizar a empresa",value:"abrir",icon:IC.home},
+      {label:"Proteger a minha marca",value:"marca",icon:IC.shield},
+      {label:"Outra questão",value:"outro",icon:IC.compass}]},
+    {kicker:"Sobre o seu negócio",h:"O seu negócio já é formalizado?",type:"choice",twoCol:true,key:"formalizacao",options:[
+      {label:"Sim, sou MEI",value:"mei",icon:IC.doc},
+      {label:"Sim, tenho empresa (ME ou EPP)",value:"empresa",icon:IC.briefcase},
+      {label:"Ainda é informal",value:"informal",icon:IC.seed},
+      {label:"Vou abrir agora",value:"abrir",icon:IC.compass}]},
+    S_URG,S_NOME,S_LOCAL]},
+  familia:{steps:[
+    {kicker:"Divórcio e separação",h:"Em que ponto você está?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Penso em me separar, mas ainda tenho dúvidas",value:"pensando",icon:IC.seed},
+      {label:"Já decidi e quero dar entrada",value:"decidi",icon:IC.bolt},
+      {label:"Já estamos separados, falta resolver o resto",value:"separados",icon:IC.files},
+      {label:"É outra questão da minha família",value:"outro",icon:IC.heart}]},
+    {kicker:"Sobre a relação",h:"Como era a relação de vocês?",hint:"Isso me ajuda a entender a divisão dos bens. Se não souber, não tem problema nenhum.",type:"choice",key:"regime",options:[
+      {label:"Casamento em comunhão de bens",desc:"Tudo o que vocês construíram juntos é dividido em partes iguais.",value:"comunhao",icon:IC.ring},
+      {label:"Casamento com separação de bens",desc:"Cada um fica com o que está no seu nome.",value:"separacao",icon:IC.scale},
+      {label:"União estável",desc:"Vocês viviam juntos como um casal, sem casamento no papel.",value:"uniao",icon:IC.heart},
+      {label:"Não sei ao certo",desc:"Tudo bem, a gente esclarece isso na nossa conversa.",value:"naosei",icon:IC.compass}]},
+    {kicker:"Sobre a sua família",h:"Vocês têm filhos juntos?",type:"choice",key:"temfilhos",options:[
+      {label:"Sim, menores de idade",value:"menores",icon:IC.kids},
+      {label:"Sim, mas já são maiores",value:"maiores",icon:IC.kids},
+      {label:"Não temos filhos",value:"nao",icon:IC.heart}]},
+    {kicker:"Um cuidado importante",h:"Existe violência ou ameaça nessa relação?",hint:"Pode ser física, psicológica, ou controle e ameaças. A sua segurança vem sempre primeiro.",type:"choice",key:"violencia",options:[
+      {label:"Não",value:"nao",icon:IC.heart},
+      {label:"Sim, ou já houve",value:"sim",icon:IC.shield,care:true},
+      {label:"Prefiro não responder agora",value:"nr",icon:IC.compass}]},
+    S_NOME,S_LOCAL]},
+  filhos:{steps:[
+    {kicker:"Sobre os seus filhos",h:"O que você mais precisa resolver agora?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"A guarda dos meus filhos",value:"guarda",icon:IC.kids},
+      {label:"Pensão ou alimentos",value:"pensao",icon:IC.scale},
+      {label:"Convivência e visitas",value:"visitas",icon:IC.heart},
+      {label:"Reconhecimento de paternidade",value:"paternidade",icon:IC.files}]},
+    {kicker:"Sobre a outra parte",h:"A outra parte está colaborando?",type:"choice",key:"colaboracao",options:[
+      {label:"Sim, dá para conversar",value:"sim",icon:IC.heart},
+      {label:"Mais ou menos, está difícil",value:"dificil",icon:IC.clock},
+      {label:"Não, ou não tenho contato",value:"nao",icon:IC.bolt}]},
+    S_URG,S_NOME,S_LOCAL]},
+  protecao:{steps:[
+    {kicker:"Antes de tudo, você",h:"Você está segura neste momento?",hint:"Responda com sinceridade. A sua segurança vem primeiro.",type:"choice",key:"seguranca",options:[
+      {label:"Sim, estou segura agora",value:"segura",icon:IC.shield},
+      {label:"Não me sinto totalmente segura",value:"insegura",icon:IC.shield},
+      {label:"Estou em perigo agora",value:"perigo",icon:IC.bolt,care:true}]},
+    {kicker:"Estou aqui com você",h:"Como eu posso te ajudar?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Entender as medidas de proteção",value:"medidas",icon:IC.shield},
+      {label:"Sair de um relacionamento com segurança",value:"sair",icon:IC.heart},
+      {label:"Só quero conversar e me informar",value:"informar",icon:IC.chat},
+      {label:"Outra situação",value:"outro",icon:IC.compass}]},
+    S_NOME,S_LOCAL]},
+  patrimonio:{steps:[
+    {kicker:"Herança e patrimônio",h:"Sua questão envolve o quê?",type:"choice",twoCol:true,key:"sub",options:[
+      {label:"Herança ou inventário",value:"heranca",icon:IC.home},
+      {label:"Divisão de bens",value:"bens",icon:IC.scale},
+      {label:"Um imóvel",value:"imovel",icon:IC.home},
+      {label:"Outra questão",value:"outro",icon:IC.compass}]},
+    S_EST,S_URG,S_NOME,S_LOCAL]},
+};
+
+const rail=document.getElementById('rail');
+rail.innerHTML=TILES.map(t=>`<div class="tile hud" onclick="openTriage('${t.area}')"><div class="tico">${t.icon}</div><h3>${t.title}</h3><p>${t.desc}</p><span class="go">Iniciar orientação ›</span></div>`).join('');
+function railMove(d){rail.scrollBy({left:d*300,behavior:'smooth'});}
+
+/* MAPA BRASIL (contorno fiel + capitais, mesma projeção lon/lat) */
+// contorno fiel do Brasil (projeção lon/lat: x=6+(lon+74)*2.2 ; y=6+(5.5-lat)*2.23)
+const BR_PATH="M36,7 L39,10 L46,13 L55,9 L59,14 L59,20 L63,20 L71,24 L78,25 L84,27 L87,29 L91,31 L92,34 L92,38 L87,43 L84,47 L83,53 L81,58 L80,64 L77,68 L74,70 L70,71 L62,75 L62,80 L59,84 L56,87 L54,93 L51,93 L46,87 L42,86 L45,82 L46,74 L49,75 L41,63 L41,55 L36,49 L25,40 L14,43 L8,39 L6,35 L9,30 L15,28 L16,21 L19,16 L27,13 L29,10 L32,9 Z";
+const CITIES=[
+  {n:"Boa Vista",x:35,y:12},{n:"Macapá",x:56,y:18},{n:"Manaus",x:37,y:25},
+  {n:"Belém",x:62,y:21},{n:"São Luís",x:71,y:24},{n:"Rio Branco",x:21,y:41},
+  {n:"Porto Velho",x:30,y:40},{n:"Teresina",x:75,y:30},{n:"Fortaleza",x:84,y:27},
+  {n:"Natal",x:91,y:31},{n:"João Pessoa",x:92,y:34},{n:"Recife",x:92,y:36},
+  {n:"Maceió",x:90,y:40},{n:"Aracaju",x:87,y:43},{n:"Salvador",x:84,y:47},
+  {n:"Palmas",x:62,y:41},{n:"Cuiabá",x:45,y:53},{n:"Brasília",x:63,y:53},
+  {n:"Goiânia",x:60,y:55},{n:"Campo Grande",x:49,y:64},{n:"Belo Horizonte",x:72,y:63},
+  {n:"Vitória",x:80,y:64},{n:"Rio de Janeiro",x:74,y:69},{n:"Curitiba",x:60,y:75},
+  {n:"Florianópolis",x:62,y:80},{n:"Porto Alegre",x:56,y:85},
+];
+const HUB={n:"São Paulo",x:66,y:71};
+const map=document.getElementById('map'),lines=document.getElementById('mapLines');
+function buildMap(){
+  let svg=`<path class="br" d="${BR_PATH}"/>`;
+  CITIES.forEach((c,i)=>{svg+=`<line class="cline" x1="${HUB.x}" y1="${HUB.y}" x2="${c.x}" y2="${c.y}" stroke-dasharray="1.6 1.4"><animate attributeName="stroke-dashoffset" from="6" to="0" dur="${3+i*0.2}s" repeatCount="indefinite"/></line>`;});
+  lines.innerHTML=svg;lines.setAttribute('viewBox','0 0 100 100');
+  map.querySelectorAll('.node').forEach(n=>n.remove());
+  const mk=(c,hub)=>{const d=document.createElement('div');d.className='node'+(hub?' hub':'');d.style.left=c.x+'%';d.style.top=c.y+'%';d.innerHTML=`<div class="pt"></div><div class="lbl">${c.n}</div>`;map.appendChild(d);};
+  CITIES.forEach(c=>mk(c,false)); mk(HUB,true);
+}
+buildMap();
+
+/* ENGINE DO QUIZ */
+let steps=[],idx=0,answers={};
+const host=document.getElementById('stepHost');
+function openTriage(area){
+  document.getElementById('intake').classList.add('open');document.body.classList.add('lock');
+  answers={};idx=0;
+  const flow=FLOWS[area]||FLOWS.descobrir;
+  steps=flow.steps;
+  if(area && area!=='descobrir'){answers.area=area;render();}
+  else{ renderWelcome(); }
+}
+function closeTriage(){document.getElementById('intake').classList.remove('open');document.body.classList.remove('lock');}
+function renderWelcome(){
+  host.innerHTML=`<div class="welcome"><div class="ring">KC</div>
+    <h1>Vamos entender<br><em class="shimmer">a sua situação.</em></h1>
+    <p>Vou te fazer poucas perguntas, com todo o sigilo, para saber como posso cuidar de você e da sua família. Leva menos de um minuto.</p>
+    <div class="start-actions"><a class="btn btn-gold mag" onclick="startFlow()">Começar</a>
+      <a class="btn btn-line mag" onclick="closeTriage()">Ver o escritório</a>
+      <span class="reassure">${IC.lock} Sigiloso, sem compromisso</span></div></div>`;
+  bindMagnetic();
+}
+function startFlow(){idx=0;render();}
+function render(){
+  const s=steps[idx];const pct=Math.round((idx/steps.length)*100);
+  let html=`<div class="step"><div class="prog-wrap"><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="prog-note">${IC.lock} Rápido e sigiloso</div></div>
+    <span class="kicker">${s.kicker}</span><h2>${s.h}</h2>`;
+  if(s.hint)html+=`<p class="hint">${s.hint}</p>`;
+  if(s.type==="choice"){
+    html+=`<div class="options${s.twoCol?' two':''}">`+s.options.map((o,i)=>
+      `<div class="opt" style="animation-delay:${i*60}ms" onclick="choose(${i},this)"><span class="sheen"></span><span class="ico">${o.icon||''}</span><span class="txt">${o.desc?('<b>'+o.label+'</b><small>'+o.desc+'</small>'):o.label}</span><span class="check">${IC.check}</span></div>`).join("")+`</div>`;
+  }else{
+    html+=`<div class="field"><input id="txt" placeholder="${s.placeholder||''}" onkeydown="if(event.key==='Enter')nextText()"><div class="step-actions"><button class="btn btn-gold mag" onclick="nextText()">Continuar</button></div>`;
+    if(s.optional)html+=`<button class="skip" onclick="skipText()">Pular esta parte</button>`;
+    html+=`</div>`;
+  }
+  if(idx>0||steps===FLOWS.descobrir.steps)html+=`<button class="back" onclick="back()">← voltar</button>`;
+  html+=`</div>`;host.innerHTML=html;bindMagnetic();
+  const t=document.getElementById('txt');if(t)t.focus();
+}
+function choose(i,el){
+  const s=steps[idx],o=s.options[i];
+  answers[s.key]=o.value; if(o.area)answers.area=o.area;
+  el.classList.add('sel');
+  document.querySelectorAll('.opt').forEach(x=>{if(x!==el)x.style.opacity=.32;});
+  if(o.care){ setTimeout(()=>showCare(()=>advance()),380); return; }
+  setTimeout(advance,400);
+}
+function nextText(){const t=document.getElementById('txt');if(!t.value.trim()){t.focus();return;}answers[steps[idx].key]=t.value.trim();advance();}
+function skipText(){answers[steps[idx].key]="";advance();}
+function advance(){ idx<steps.length-1?(idx++,render()):finish(); }
+function back(){ if(idx>0){idx--;render();} else if(steps===FLOWS.descobrir.steps){renderWelcome();} }
+function showCare(then){
+  host.innerHTML=`<div class="step"><div class="care"><h4>A sua segurança vem primeiro.</h4>
+    Se você estiver em <b>perigo imediato</b>, ligue <b>190</b> agora. Para orientação e apoio, a <b>Central 180</b> funciona 24 horas e é gratuita.<br><br>
+    Eu estou aqui para te ajudar com os próximos passos, com toda a discrição. Podemos continuar quando você se sentir pronta.</div>
+    <div class="step-actions"><a class="btn btn-gold mag" onclick="(${then.name}||continueCare)()" id="ccont">Continuar</a>
+      <a class="btn btn-wa mag" onclick="goWhatsApp('Olá, Dra. Kury Caila. Preciso de ajuda com uma situação de segurança.')">Falar agora no WhatsApp</a></div></div>`;
+  window.__careThen=then; bindMagnetic();
+  document.getElementById('ccont').setAttribute('onclick','window.__careThen()');
+}
+function finish(){
+  captureLead('quiz_concluido');
+  const cat=CAT[answers.area]||CAT.descobrir, nome=answers.nome?answers.nome.split(' ')[0]:"";
+  const prio=answers.urgencia==='urgente'?'Urgente':answers.urgencia==='preocupante'?'Preciso resolver logo':'Sem pressa';
+  let resumo=`Pelo que você me contou, a sua situação envolve ${cat.frase}.`;
+  if(answers.relato)resumo+=` Você mencionou: "${answers.relato}".`;
+  const linhas=[`Nome: ${answers.nome||''}`,`Assunto: ${cat.label}`];
+  if(answers.local)linhas.push(`Cidade: ${answers.local}`);
+  if(answers.violencia==='sim')linhas.push('Atenção: mencionou violência ou ameaça na relação');
+  if(answers.flags&&answers.flags!=='nenhuma')linhas.push('Ponto importante: '+({gravida:'estava grávida',assedio:'sofreu assédio',acidente:'acidente ou doença no trabalho'}[answers.flags]||answers.flags));
+  if(answers.urgencia)linhas.push(`Prioridade: ${prio}`);
+  if(answers.estagio)linhas.push(`Situação: ${answers.estagio}`);
+  if(answers.relato)linhas.push(`Relato: ${answers.relato}`);
+  const wa=`Olá, Dra. Kury Caila. Fiz a orientação inicial no site.%0A%0A${linhas.join('%0A')}%0A%0AGostaria de agendar uma consulta.`;
+  host.innerHTML=`<div class="step">
+    <div class="summary"><span class="mono" style="color:var(--ice)">Sua orientação inicial</span>
+      <h3 style="margin-top:10px">${nome?'Obrigada, '+nome+'.':'Obrigada por compartilhar.'}</h3>
+      <p>${resumo}</p>
+      <p>É uma situação que merece atenção. Com uma boa análise do seu caso, dá para enxergar os caminhos possíveis e buscar, com estratégia e cuidado, a melhor solução para você. Sem promessas, mas com dedicação total.</p>
+      <div class="rec">${IC.chat}<span>Ao continuar, o WhatsApp já abre com o resumo da sua situação. Assim eu chego preparada para te ouvir e já falamos dos próximos passos.</span></div></div>
+    <div class="step-actions"><a class="btn btn-wa mag" onclick="goWhatsApp(decodeURIComponent('${wa}'))">Falar com a Dra. Kury Caila</a>
+      <a class="btn btn-line mag" onclick="closeTriage()">Voltar ao início</a></div></div>`;
+  bindMagnetic();
+}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function goWhatsApp(msg){window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
+
+/* BUSCA no topo: devolve o quiz da área (Orientação Inicial Guiada) + contato direto */
+const KW=[
+  {area:'familia',t:['divorcio','separacao','separar','casamento','casada','uniao estavel','regime','bens','partilha','divisao de bens','conjuge','marido','esposo','ex marido','ex-marido','companheiro','traicao','amante','alienacao parental','guarda de fato','pai dos meus filhos']},
+  {area:'filhos',t:['guarda','pensao','pensao alimenticia','alimentos','filho','filhos','visita','convivencia','paternidade','dna','guarda compartilhada','crianca','menor','sustento']},
+  {area:'previdenciario',t:['aposentadoria','aposentar','inss','beneficio','auxilio','auxilio doenca','auxilio maternidade','salario maternidade','bpc','loas','pensao por morte','revisao','tempo de contribuicao','invalidez','pericia','aposentar cedo','beneficio negado']},
+  {area:'consumidor',t:['consumidor','banco','financiamento','financeira','juros','emprestimo','plano de saude','convenio','negativado','serasa','spc','nome sujo','nome limpo','golpe','fraude','estelionato','pix','compra','produto','servico','cobranca indevida','cobranca','superendividamento','divida','dividas','procon','telefonia','operadora','internet','cartao','loja','fui enganada','fui lesada','me lesaram','processar empresa','processar loja']},
+  {area:'trabalhista',t:['trabalho','trabalhista','emprego','demissao','demitida','rescisao','verbas','verbas rescisorias','fgts','horas extras','assedio moral','assedio sexual','assedio','discriminacao','sem registro','carteira assinada','justa causa','insalubridade','patrao','chefe','clt','salario atrasado']},
+  {area:'empresarial',t:['empresa','empreendedora','negocio','meu negocio','mei','cnpj','contrato','socio','socia','sociedade','marca','patente','registro de marca','franquia','fornecedor','cliente nao pagou','funcionario','loja','ecommerce','delivery','autonoma','microempresa','abrir empresa']},
+  {area:'protecao',t:['violencia','violencia domestica','agressao','apanhei','ameaca','ameacada','medida protetiva','protetiva','maria da penha','abuso','perigo','medo','perseguicao','stalker','ex violento','ex agressivo','ciume','controle']},
+  {area:'patrimonio',t:['heranca','herdar','inventario','imovel','casa','terreno','patrimonio','testamento','espolio','usucapiao','partilha de bens','falecimento','falecido','doacao','bem de familia']},
+];
+const AREA_LABEL={familia:'Divórcio e família',filhos:'Guarda e pensão',previdenciario:'Aposentadoria e INSS',consumidor:'Fui lesada por uma empresa',trabalhista:'Direito do trabalho',empresarial:'Mulher empreendedora',protecao:'Proteção e segurança',patrimonio:'Herança e patrimônio',descobrir:'Orientação geral'};
+function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function matchArea(q){const n=norm(q);if(!n)return null;let best=null,bestLen=0;for(const k of KW){for(const t of k.t){const tn=norm(t);if((n.length>=3&&tn.includes(n))||n.includes(tn)){if(tn.length>bestLen){best=k.area;bestLen=tn.length;}}}}return best;}
+function onSearch(){
+  const el=document.getElementById('searchRes'),q=document.getElementById('search').value.trim();
+  if(!q){el.classList.remove('open');el.innerHTML='';return;}
+  const area=matchArea(q);
+  const waq=encodeURIComponent('Olá, Dra. Kury Caila. Gostaria de falar sobre: '+q);
+  let first;
+  if(area){
+    first=`<div class="sres" onclick="pickSearch('${area}')"><div class="si">${IC.chat}</div><div><b>Orientação Inicial Guiada</b><small>Sobre: ${AREA_LABEL[area]}. Entenda a sua situação em um minuto, com sigilo.</small></div></div>`;
+  }else{
+    first=`<div class="sres" onclick="pickSearch('descobrir')"><div class="si">${IC.compass}</div><div><b>Entender a minha situação</b><small>Vou te orientar sobre isso com uma conversa guiada e sigilosa, em um minuto.</small></div></div>`;
+  }
+  const second=`<div class="sres" onclick="goWhatsApp(decodeURIComponent('${waq}'));clearSearch()"><div class="si">💬</div><div><b>Falar direto com a Dra. Kury Caila</b><small>Enviar a sua dúvida agora pelo WhatsApp.</small></div></div>`;
+  el.innerHTML=first+second;el.classList.add('open');
+}
+function searchGo(){ onSearch(); }
+function pickSearch(area){clearSearch();openTriage(area);}
+function clearSearch(){const s=document.getElementById('search'),el=document.getElementById('searchRes');s.value='';el.classList.remove('open');el.innerHTML='';}
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap')){const el=document.getElementById('searchRes');if(el){el.classList.remove('open');}}});
+
+const cg=document.getElementById('cglow');
+window.addEventListener('mousemove',e=>{
+  cg.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
+  const dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);
+  document.querySelectorAll('.orb').forEach((o,i)=>{const f=(i%2?24:-28);o.style.transform=`translate(${dx*f}px,${dy*f}px)`;});
+});
+function bindMagnetic(){document.querySelectorAll('.mag').forEach(b=>{if(b._m)return;b._m=1;
+  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.3}px)`;});
+  b.addEventListener('mouseleave',()=>b.style.transform='');});}
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+function setTheme(t){document.body.classList.remove('theme-gold','theme-mid','theme-emerald','theme-wine','theme-light');document.body.classList.add('theme-'+t);buildMap();}
+function toggleTheme(){setTheme(document.body.classList.contains('theme-light')?'wine':'light');}
+document.body.classList.add('theme-wine');
+document.getElementById('year').textContent=new Date().getFullYear();
+bindMagnetic();
+/* auto-abrir o quiz por link (para anúncios): ?q=familia / ?q=previdenciario / ?q=geral etc. */
+(function(){try{const p=new URLSearchParams(location.search);const q=p.get('q')||p.get('orientacao');if(q!==null){const area=FLOWS[q]?q:'descobrir';openTriage(area);}}catch(e){}})();
+</script>
+</body>
+</html>
