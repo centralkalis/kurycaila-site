@@ -99,6 +99,7 @@
   .topbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 34px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;background:var(--shell2);backdrop-filter:blur(14px)}
   .topbar .brand-mono{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;display:inline-flex;align-items:center}
   .brand-mono .sep{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold);margin:0 9px;vertical-align:middle;flex-shrink:0}
+  .brand-mono .bn-a,.brand-mono .bn-b{white-space:nowrap}
   .search-wrap{position:relative;flex:1 1 260px;min-width:200px;max-width:560px}
   .search-wrap .sic{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.7;pointer-events:none}
   .search-wrap input{width:100%;padding:11px 16px 11px 42px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ivory);font-family:var(--sans);font-weight:300;font-size:.86rem;outline:none;transition:.2s}
@@ -128,7 +129,7 @@
   .t3{background:linear-gradient(135deg,#0b1512 45%,#d9b877 45%)}
   .t4{background:linear-gradient(135deg,#170a10 45%,#e0b58f 45%)}
   .t5{background:linear-gradient(135deg,#e9e7ec 45%,#a97e46 45%)}
-  @media(max-width:760px){.topbar{padding:11px 16px;gap:10px}.topbar .brand-mono{white-space:normal;overflow:visible;text-overflow:clip;font-size:.55rem;line-height:1.5;flex:1 1 auto;max-width:64vw}.search-wrap{order:3;flex:1 1 100%;max-width:none}.tb-right{margin-left:auto;gap:10px}.live .live-txt{display:none}.tdot{width:16px;height:16px}.themebar{gap:6px}}
+  @media(max-width:760px){.topbar{padding:11px 16px;gap:10px}.topbar .brand-mono{flex-wrap:wrap;overflow:visible;font-size:.52rem;letter-spacing:.4px;line-height:1.4;flex:1 1 auto;min-width:0;max-width:none}.topbar .brand-mono .sep{margin:0 6px}.search-wrap{order:3;flex:1 1 100%;max-width:none}.tb-right{margin-left:auto;gap:10px}.live .live-txt{display:none}.tdot{width:16px;height:16px}.themebar{gap:6px}}
   @media(max-width:760px){aside .status{display:flex}aside .status .mono{display:none}}
 
   .pad{padding:34px}
@@ -272,8 +273,8 @@
 
   /* BENTO */
   .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bx.about{grid-row:auto}}
-  @media(max-width:560px){.bento{grid-template-columns:1fr;margin-top:36px}.bento .bx{grid-column:auto;grid-row:auto;padding:24px}.bx.about .portrait{min-height:180px}}
+  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr);align-items:start}.bx.about{grid-row:auto}}
+  @media(max-width:760px){.bento{grid-template-columns:1fr;margin-top:36px}.bento .bx,.bento .bx.about,.bento .bx.quote{grid-column:auto;grid-row:auto;padding:24px}.bx.about .portrait{min-height:180px}}
   .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
   .bx .mono{margin-bottom:14px;display:block}
   .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
@@ -403,7 +404,7 @@
 
 <main id="top">
   <div class="topbar">
-    <span class="mono brand-mono">DRA. KURY CAILA <span class="sep"></span> ADVOCACIA PARA MULHERES</span>
+    <span class="mono brand-mono"><span class="bn-a">DRA. KURY CAILA</span><span class="sep"></span><span class="bn-b">ADVOCACIA PARA MULHERES</span></span>
     <div class="search-wrap">
       <svg class="sic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
       <input id="search" autocomplete="off" placeholder="Com o que você precisa de ajuda? Ex: divórcio, INSS, fui enganada por uma loja..." oninput="onSearch()" onkeydown="if(event.key==='Enter')searchGo()">
