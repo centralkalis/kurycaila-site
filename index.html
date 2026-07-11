@@ -350,6 +350,7 @@
   .options{display:grid;grid-template-columns:1fr;gap:12px;text-align:left;max-width:600px;margin:0 auto}
   .options.two{grid-template-columns:1fr 1fr}
   @media(max-width:600px){.options.two{grid-template-columns:1fr}}
+  .ferr{color:#ff9a9a;font-size:.83rem;margin-top:9px;min-height:1em;text-align:center;font-weight:500}
   .opt{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px 20px;cursor:pointer;transition:.3s;font-size:.97rem;display:flex;align-items:center;gap:15px;opacity:0;animation:optIn .55s ease forwards;overflow:hidden}
   @keyframes optIn{to{opacity:1}}
   .opt .sheen{position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(var(--glowc),.13),transparent);transform:skewX(-18deg);transition:.6s}
@@ -581,7 +582,7 @@ function captureLead(etapa){
     const qp=new URLSearchParams(location.search);
     const payload={
       prioridade:prioridade, violencia:violencia,
-      nome:answers.nome||'', area:(AREA_LABEL[answers.area]||answers.area||''),
+      nome:answers.nome||'', telefone:answers.telefone||'', area:(AREA_LABEL[answers.area]||answers.area||''),
       cidade:answers.local||'', etiquetas:tags.join(' | '), pontos:pontos,
       situacao:answers.estagio||'', relato:answers.relato||'',
       detalhe:answers.regime||answers.ponto||answers.sub||'',
@@ -647,6 +648,7 @@ const S_EST={kicker:"Quase lá",h:"Você já deu algum passo?",type:"choice",key
   {label:"Já tenho alguns documentos guardados",value:"documentos",icon:IC.files},
   {label:"Já existe um processo em andamento",value:"processo",icon:IC.gavel}]};
 const S_NOME={kicker:"Quase terminando",h:"Como você se chama?",hint:"Para eu te chamar pelo nome quando a gente conversar.",type:"text",key:"nome",placeholder:"Seu primeiro nome"};
+const S_TEL={kicker:"Seu contato",h:"Qual o melhor número pra eu te chamar?",hint:"Com DDD. É por aqui que eu te encontro caso a gente não se fale no WhatsApp. Fica em total sigilo.",type:"text",key:"telefone",tel:true,placeholder:"(11) 91234-5678"};
 const S_LOCAL={kicker:"Por último",h:"De onde você fala comigo?",hint:"Sua cidade e estado. Atendo em todo o Brasil, isso só me ajuda a te orientar melhor.",type:"text",key:"local",placeholder:"Ex: Recife, PE",optional:true};
 
 /* FLUXOS por área */
@@ -663,14 +665,14 @@ const FLOWS={
       {label:"Herança, bens ou patrimônio",value:"patrimonio",area:"patrimonio",icon:IC.ring},
       {label:"Sinceramente, ainda não sei explicar",value:"indefinido",area:"descobrir",icon:IC.compass}]},
     {kicker:"Me conta um pouco mais",h:"Quer descrever com as suas palavras?",hint:"Escreva à vontade, ou pule esta parte. O que você contar me ajuda a te entender melhor.",type:"text",key:"relato",placeholder:"O que está acontecendo...",optional:true},
-    S_URG,S_NOME,S_LOCAL]},
+    S_URG,S_NOME,S_TEL,S_LOCAL]},
   previdenciario:{steps:[
     {kicker:"Aposentadoria e INSS",h:"Qual é a sua situação com o INSS?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Quero me aposentar",value:"aposentar",icon:IC.doc},
       {label:"Meu benefício foi negado",value:"negado",icon:IC.bolt},
       {label:"Auxílio-doença, pensão ou BPC",value:"beneficio",icon:IC.heart},
       {label:"Salário-maternidade",value:"maternidade",icon:IC.kids}]},
-    S_EST,S_URG,S_NOME,S_LOCAL]},
+    S_EST,S_URG,S_NOME,S_TEL,S_LOCAL]},
   consumidor:{steps:[
     {kicker:"Direito do consumidor",h:"O que aconteceu com você?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Problema com banco ou financeira",value:"banco",icon:IC.scale},
@@ -683,7 +685,7 @@ const FLOWS={
       {label:"Sim, tenho os comprovantes",value:"sim",icon:IC.files},
       {label:"Tenho algumas coisas",value:"parcial",icon:IC.doc},
       {label:"Não guardei nada",value:"nao",icon:IC.compass}]},
-    S_URG,S_NOME,S_LOCAL]},
+    S_URG,S_NOME,S_TEL,S_LOCAL]},
   trabalhista:{steps:[
     {kicker:"Direito do trabalho",h:"Sobre o que é a sua questão?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Fui demitida ou vou sair",value:"demissao",icon:IC.files},
@@ -695,7 +697,7 @@ const FLOWS={
       {label:"Sofri assédio, moral ou sexual",value:"assedio",icon:IC.shield},
       {label:"Tive acidente ou doença no trabalho",value:"acidente",icon:IC.heart},
       {label:"Nenhuma dessas",value:"nenhuma",icon:IC.compass}]},
-    S_URG,S_NOME,S_LOCAL]},
+    S_URG,S_NOME,S_TEL,S_LOCAL]},
   empresarial:{steps:[
     {kicker:"Mulher empreendedora",h:"Como posso ajudar o seu negócio?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Contratos e documentos",value:"contratos",icon:IC.files},
@@ -709,7 +711,7 @@ const FLOWS={
       {label:"Sim, tenho empresa (ME ou EPP)",value:"empresa",icon:IC.briefcase},
       {label:"Ainda é informal",value:"informal",icon:IC.seed},
       {label:"Vou abrir agora",value:"abrir",icon:IC.compass}]},
-    S_URG,S_NOME,S_LOCAL]},
+    S_URG,S_NOME,S_TEL,S_LOCAL]},
   familia:{steps:[
     {kicker:"Divórcio e separação",h:"Em que ponto você está?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Penso em me separar, mas ainda tenho dúvidas",value:"pensando",icon:IC.seed},
@@ -729,7 +731,7 @@ const FLOWS={
       {label:"Não",value:"nao",icon:IC.heart},
       {label:"Sim, ou já houve",value:"sim",icon:IC.shield,care:true},
       {label:"Prefiro não responder agora",value:"nr",icon:IC.compass}]},
-    S_NOME,S_LOCAL]},
+    S_NOME,S_TEL,S_LOCAL]},
   filhos:{steps:[
     {kicker:"Sobre os seus filhos",h:"O que você mais precisa resolver agora?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"A guarda dos meus filhos",value:"guarda",icon:IC.kids},
@@ -740,7 +742,7 @@ const FLOWS={
       {label:"Sim, dá para conversar",value:"sim",icon:IC.heart},
       {label:"Mais ou menos, está difícil",value:"dificil",icon:IC.clock},
       {label:"Não, ou não tenho contato",value:"nao",icon:IC.bolt}]},
-    S_URG,S_NOME,S_LOCAL]},
+    S_URG,S_NOME,S_TEL,S_LOCAL]},
   protecao:{steps:[
     {kicker:"Antes de tudo, você",h:"Você está segura neste momento?",hint:"Responda com sinceridade. A sua segurança vem primeiro.",type:"choice",key:"seguranca",options:[
       {label:"Sim, estou segura agora",value:"segura",icon:IC.shield},
@@ -751,14 +753,14 @@ const FLOWS={
       {label:"Sair de um relacionamento com segurança",value:"sair",icon:IC.heart},
       {label:"Só quero conversar e me informar",value:"informar",icon:IC.chat},
       {label:"Outra situação",value:"outro",icon:IC.compass}]},
-    S_NOME,S_LOCAL]},
+    S_NOME,S_TEL,S_LOCAL]},
   patrimonio:{steps:[
     {kicker:"Herança e patrimônio",h:"Sua questão envolve o quê?",type:"choice",twoCol:true,key:"sub",options:[
       {label:"Herança ou inventário",value:"heranca",icon:IC.home},
       {label:"Divisão de bens",value:"bens",icon:IC.scale},
       {label:"Um imóvel",value:"imovel",icon:IC.home},
       {label:"Outra questão",value:"outro",icon:IC.compass}]},
-    S_EST,S_URG,S_NOME,S_LOCAL]},
+    S_EST,S_URG,S_NOME,S_TEL,S_LOCAL]},
 };
 
 const rail=document.getElementById('rail');
@@ -823,7 +825,8 @@ function render(){
     html+=`<div class="options${s.twoCol?' two':''}">`+s.options.map((o,i)=>
       `<div class="opt" style="animation-delay:${i*60}ms" onclick="choose(${i},this)"><span class="sheen"></span><span class="ico">${o.icon||''}</span><span class="txt">${o.desc?('<b>'+o.label+'</b><small>'+o.desc+'</small>'):o.label}</span><span class="check">${IC.check}</span></div>`).join("")+`</div>`;
   }else{
-    html+=`<div class="field"><input id="txt" placeholder="${s.placeholder||''}" onkeydown="if(event.key==='Enter')nextText()"><div class="step-actions"><button class="btn btn-gold mag" onclick="nextText()">Continuar</button></div>`;
+    const extra=s.tel?` inputmode="tel" oninput="maskTel(this)" maxlength="16"`:'';
+    html+=`<div class="field"><input id="txt"${extra} placeholder="${s.placeholder||''}" onkeydown="if(event.key==='Enter')nextText()"><div class="ferr" id="ferr"></div><div class="step-actions"><button class="btn btn-gold mag" onclick="nextText()">Continuar</button></div>`;
     if(s.optional)html+=`<button class="skip" onclick="skipText()">Pular esta parte</button>`;
     html+=`</div>`;
   }
@@ -843,8 +846,14 @@ function choose(i,el){
   if(o.care){ setTimeout(()=>showCare(()=>advance()),380); return; }
   setTimeout(advance,400);
 }
-function nextText(){const t=document.getElementById('txt');if(!t.value.trim()){t.focus();return;}answers[steps[idx].key]=t.value.trim();advance();}
+function nextText(){
+  const s=steps[idx],t=document.getElementById('txt'),val=t.value.trim();
+  if(s.tel){ if(!validTel(val)){const fe=document.getElementById('ferr');if(fe)fe.textContent='Coloque um número válido com DDD. Ex: (11) 91234-5678';t.focus();return;} answers[s.key]=val;advance();return; }
+  if(!val){t.focus();return;}answers[s.key]=val;advance();
+}
 function skipText(){answers[steps[idx].key]="";advance();}
+function maskTel(el){let v=el.value.replace(/\D/g,'').slice(0,11);let o=v;if(v.length>10)o='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)o='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)o='('+v.slice(0,2)+') '+v.slice(2);else if(v.length>0)o='('+v;el.value=o;const fe=document.getElementById('ferr');if(fe)fe.textContent='';}
+function validTel(str){const d=(str||'').replace(/\D/g,'');if(d.length<10||d.length>11)return false;if(parseInt(d.slice(0,2),10)<11)return false;if(d.length===11&&d[2]!=='9')return false;return true;}
 function advance(){ idx<steps.length-1?(idx++,render()):finish(); }
 function back(){ if(idx>0){idx--;render();} else if(steps===FLOWS.descobrir.steps){renderWelcome();} }
 function showCare(then){
@@ -863,6 +872,7 @@ function finish(){
   let resumo=`Pelo que você me contou, a sua situação envolve ${cat.frase}.`;
   if(answers.relato)resumo+=` Você mencionou: "${answers.relato}".`;
   const linhas=[`Nome: ${answers.nome||''}`,`Assunto: ${cat.label}`];
+  if(answers.telefone)linhas.push(`Contato: ${answers.telefone}`);
   if(answers.local)linhas.push(`Cidade: ${answers.local}`);
   if(answers.violencia==='sim')linhas.push('Atenção: mencionou violência ou ameaça na relação');
   if(answers.flags&&answers.flags!=='nenhuma')linhas.push('Ponto importante: '+({gravida:'estava grávida',assedio:'sofreu assédio',acidente:'acidente ou doença no trabalho'}[answers.flags]||answers.flags));
