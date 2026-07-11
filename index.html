@@ -273,7 +273,7 @@
   /* BENTO */
   .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
   @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.bento{grid-template-columns:1fr}}
+  @media(max-width:560px){.bento{grid-template-columns:1fr;margin-top:36px}.bx.about,.bx.quote{grid-column:auto}.bx.about{grid-row:auto}.bx.about .portrait{min-height:180px}.bx{padding:24px}}
   .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
   .bx .mono{margin-bottom:14px;display:block}
   .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
@@ -325,8 +325,9 @@
   .in-skip{font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:1px solid transparent;padding-bottom:2px;transition:.25s}
   .in-skip:hover{color:var(--gold);border-color:var(--gold)}
   @media(max-width:520px){.in-skip{display:none}}
-  .in-body{position:relative;z-index:5;flex:1;min-height:0;display:flex;align-items:safe center;justify-content:safe center;overflow-y:auto;padding:34px 30px 48px}
-  .card{width:100%;max-width:700px;text-align:center}
+  .in-body{position:relative;z-index:5;flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:34px 30px 48px}
+  .card{width:100%;max-width:700px;text-align:center;margin:auto}
+  @media(max-width:520px){.in-body{padding:20px 15px 40px}.in-top{padding:16px 18px}}
   .ring{width:84px;height:84px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.9rem;color:var(--gold);margin:6px auto 26px;position:relative;box-shadow:0 0 40px -16px rgba(var(--glowc),.4)}
   .ring::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(var(--glowc),.22);animation:pulse 3.6s ease-in-out infinite}
   @keyframes pulse{50%{transform:scale(1.09);opacity:.35}}
@@ -532,7 +533,7 @@
       <div class="cols">
         <div><div class="sb-logo" style="margin-bottom:12px">Kury Caila</div><p style="max-width:320px">Advocacia dedicada a mulheres e suas famílias. Escuta, discrição e estratégia, em todo o Brasil.</p></div>
         <div><h4>Navegação</h4><p><a onclick="openTriage()">Orientação inicial</a></p><p><a onclick="scrollToId('areas')">Áreas</a></p><p><a onclick="scrollToId('brasil')">Atendimento</a></p><p><a onclick="scrollToId('sobre')">Sobre</a></p></div>
-        <div><h4>Contato</h4><p><a onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">WhatsApp</a></p><p><a href="mailto:[SEU_EMAIL]">[SEU_EMAIL]</a></p><p>São Paulo, SP. On-line para todo o Brasil.</p><p>OAB/SP nº 520.927</p></div>
+        <div><h4>Contato</h4><p><a onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">WhatsApp</a></p><p><a href="mailto:contato@kurycaila.com.br">contato@kurycaila.com.br</a></p><p>São Paulo, SP. On-line para todo o Brasil.</p><p>OAB/SP nº 520.927</p></div>
       </div>
       <div class="disc">Este site tem caráter meramente informativo, em conformidade com o Provimento nº 205/2021 e o Código de Ética e Disciplina da OAB. O conteúdo e a orientação inicial não constituem oferta de serviços, captação de clientela, promessa de resultado nem análise jurídica de casos específicos, o que ocorre apenas em consulta individual. Os dados são tratados com sigilo e conforme a LGPD. © <span id="year"></span> Kury Caila, Advocacia.</div>
     </footer>
@@ -835,6 +836,10 @@ function choose(i,el){
   answers[s.key]=o.value; if(o.area)answers.area=o.area;
   el.classList.add('sel');
   document.querySelectorAll('.opt').forEach(x=>{if(x!==el)x.style.opacity=.32;});
+  // Do quiz geral, ao escolher o assunto, entra no quiz específico daquela área
+  if(o.area && o.area!=='descobrir' && steps===FLOWS.descobrir.steps && FLOWS[o.area]){
+    setTimeout(()=>{steps=FLOWS[o.area].steps;idx=0;render();},420); return;
+  }
   if(o.care){ setTimeout(()=>showCare(()=>advance()),380); return; }
   setTimeout(advance,400);
 }
