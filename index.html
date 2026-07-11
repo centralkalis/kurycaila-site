@@ -648,7 +648,7 @@ const S_EST={kicker:"Quase lá",h:"Você já deu algum passo?",type:"choice",key
   {label:"Já tenho alguns documentos guardados",value:"documentos",icon:IC.files},
   {label:"Já existe um processo em andamento",value:"processo",icon:IC.gavel}]};
 const S_NOME={kicker:"Quase terminando",h:"Como você se chama?",hint:"Para eu te chamar pelo nome quando a gente conversar.",type:"text",key:"nome",placeholder:"Seu primeiro nome"};
-const S_TEL={kicker:"Seu contato",h:"Qual o melhor número pra eu te chamar?",hint:"Com DDD. É por aqui que eu te encontro caso a gente não se fale no WhatsApp. Fica em total sigilo.",type:"text",key:"telefone",tel:true,placeholder:"(11) 91234-5678"};
+const S_TEL={kicker:"Contato",h:"Quer deixar um número pra eu te retornar?",hint:"Só se você quiser, e com todo o sigilo. Se preferir, é só pular e você me chama quando se sentir pronta.",type:"text",key:"telefone",tel:true,optional:true,placeholder:"(11) 91234-5678"};
 const S_LOCAL={kicker:"Por último",h:"De onde você fala comigo?",hint:"Sua cidade e estado. Atendo em todo o Brasil, isso só me ajuda a te orientar melhor.",type:"text",key:"local",placeholder:"Ex: Recife, PE",optional:true};
 
 /* FLUXOS por área */
@@ -848,7 +848,7 @@ function choose(i,el){
 }
 function nextText(){
   const s=steps[idx],t=document.getElementById('txt'),val=t.value.trim();
-  if(s.tel){ if(!validTel(val)){const fe=document.getElementById('ferr');if(fe)fe.textContent='Coloque um número válido com DDD. Ex: (11) 91234-5678';t.focus();return;} answers[s.key]=val;advance();return; }
+  if(s.tel){ if(!val&&s.optional){answers[s.key]='';advance();return;} if(!validTel(val)){const fe=document.getElementById('ferr');if(fe)fe.textContent='Coloque um número válido com DDD, ou toque em pular.';t.focus();return;} answers[s.key]=val;advance();return; }
   if(!val){t.focus();return;}answers[s.key]=val;advance();
 }
 function skipText(){answers[steps[idx].key]="";advance();}
