@@ -83,7 +83,6 @@
   .sb-item span{font-size:.5rem;letter-spacing:.5px;text-transform:uppercase}
   .sb-item:hover,.sb-item.on{color:var(--gold);background:rgba(var(--glowc),.1)}
   .sb-bottom{display:flex;flex-direction:column;align-items:center;gap:14px}
-  .sb-wa{width:44px;height:44px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
   .status{display:flex;flex-direction:column;align-items:center;gap:4px}
   .dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:bl 2s infinite}
   @keyframes bl{50%{opacity:.4}}
@@ -91,7 +90,7 @@
     aside{flex-direction:row;top:auto;bottom:0;right:0;width:auto;height:68px;padding:0 5px;border-right:none;border-top:1px solid var(--line);justify-content:space-between;align-items:center}
     .sb-logo{margin:0;font-size:1.25rem}
     .sb-nav{flex-direction:row;flex:0;gap:0}.sb-item{width:auto;padding:0 6px;height:58px}.sb-item svg{width:24px;height:24px}.sb-item span{font-size:.56rem}
-    .sb-bottom{flex-direction:row;gap:6px}.status{display:none}.sb-wa{width:46px;height:46px;font-size:1.3rem}
+    .sb-bottom{flex-direction:row;gap:6px}.status{display:flex;padding:0 6px}.status .dot{width:10px;height:10px}.status .mono{font-size:.5rem;letter-spacing:.5px;color:var(--muted)}
   }
 
   main{margin-left:var(--sb);position:relative;z-index:2}
@@ -130,7 +129,7 @@
   .t4{background:linear-gradient(135deg,#170a10 45%,#e0b58f 45%)}
   .t5{background:linear-gradient(135deg,#e9e7ec 45%,#a97e46 45%)}
   @media(max-width:760px){.topbar{padding:11px 16px;gap:10px}.topbar .brand-mono{flex-wrap:wrap;overflow:visible;font-size:.56rem;letter-spacing:.3px;line-height:1.4;flex:1 1 auto;min-width:0;max-width:none}.topbar .brand-mono .sep{margin:0 6px}.search-wrap{order:3;flex:1 1 100%;max-width:none}.search-wrap input{font-size:.95rem;padding-top:13px;padding-bottom:13px}.tb-right{margin-left:auto;gap:10px}.live .live-txt{display:none}.live .br-amulet{width:18px;height:19px}.tdot{width:16px;height:16px}.themebar{gap:6px}}
-  @media(max-width:760px){aside .status{display:none}}
+  @media(max-width:760px){aside .status{display:flex}}
 
   .pad{padding:34px}
   @media(max-width:760px){.pad{padding:18px}}
@@ -277,8 +276,9 @@
   @media(max-width:760px){.bento{grid-template-columns:1fr;margin-top:36px}.bento .bx,.bento .bx.about,.bento .bx.quote{grid-column:auto;grid-row:auto;padding:24px 24px 24px 26px}.bx.about .portrait{min-height:180px}
     /* assinatura do bento no mobile: barrinha de acento + entrada com leve escala */
     .bento .bx::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(var(--gold),var(--rose));opacity:.7;z-index:1}
-    .bento .bx.rv{transform:translateY(22px) scale(.965)}
-    .bento .bx.rv.in{transform:none}}
+    .bento .bx.rv{transform:translateX(-32px) scale(.97)}
+    .bento .bx:nth-child(even).rv{transform:translateX(32px) scale(.97)}
+    .bento .bx.rv.in,.bento .bx:nth-child(even).rv.in{transform:none}}
   .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
   .bx .mono{margin-bottom:14px;display:block}
   .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
@@ -401,8 +401,7 @@
     <a class="sb-item" onclick="openTriage()"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg><span>Orientar</span></a>
   </nav>
   <div class="sb-bottom">
-    <div class="status"><span class="dot"></span><span class="mono" style="font-size:.44rem">disponível</span></div>
-    <a class="sb-wa" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">💬</a>
+    <div class="status"><span class="dot"></span><span class="mono">disponível</span></div>
   </div>
 </aside>
 
