@@ -272,8 +272,8 @@
 
   /* BENTO */
   .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.bento{grid-template-columns:1fr;margin-top:36px}.bx.about,.bx.quote{grid-column:auto}.bx.about{grid-row:auto}.bx.about .portrait{min-height:180px}.bx{padding:24px}}
+  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bx.about{grid-row:auto}}
+  @media(max-width:560px){.bento{grid-template-columns:1fr;margin-top:36px}.bento .bx{grid-column:auto;grid-row:auto;padding:24px}.bx.about .portrait{min-height:180px}}
   .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
   .bx .mono{margin-bottom:14px;display:block}
   .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
