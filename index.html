@@ -32,10 +32,10 @@
   body.theme-light .hud::before,body.theme-light .hud::after{border-color:#b8892f;opacity:.6}
   body.theme-light .map-badge .mini path{fill:#b8892f}
   body.theme-light .live .br-amulet path{fill:#b8892f}
-  body.theme-light .tcard,body.theme-light .tile,body.theme-light .valcard,body.theme-light .flow-step,
+  body.theme-light .tcard,body.theme-light .tile,body.theme-light .vp,body.theme-light .flow-step,
   body.theme-light .bx,body.theme-light .reach,body.theme-light .feature,body.theme-light .faq details,
   body.theme-light .ctastrip,body.theme-light .search-res,body.theme-light aside{box-shadow:0 24px 60px -34px rgba(143,47,74,.42)}
-  body.theme-light .tile:hover,body.theme-light .valcard:hover,body.theme-light .flow-step:hover,
+  body.theme-light .tile:hover,body.theme-light .vp:hover,body.theme-light .flow-step:hover,
   body.theme-light .tcard:hover,body.theme-light .bx:hover{box-shadow:0 36px 74px -32px rgba(143,47,74,.55)}
   body.theme-light .map svg .br{fill:rgba(143,47,74,.05);stroke:rgba(143,47,74,.42)}
   body.theme-light .map svg .cline{stroke:rgba(143,47,74,.34)}
@@ -224,11 +224,11 @@
   .contact-fab{position:fixed;bottom:24px;right:24px;z-index:95;display:inline-flex;align-items:center;gap:11px;background:linear-gradient(120deg,var(--gold),var(--gold-hi));color:#2a1418;padding:9px 20px 9px 9px;border-radius:999px;box-shadow:0 16px 40px -12px rgba(var(--glowc),.6);cursor:pointer;transition:.3s;animation:fabpulse 3.5s ease-in-out infinite}
   @keyframes fabpulse{0%,100%{box-shadow:0 16px 40px -12px rgba(var(--glowc),.55)}50%{box-shadow:0 16px 52px -8px rgba(var(--glowc),.85)}}
   .contact-fab:hover{transform:translateY(-3px)}
-  .contact-fab .av{width:42px;height:42px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .contact-fab .av svg{width:25px;height:25px;stroke:var(--gold-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .contact-fab .av{width:42px;height:42px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .contact-fab .av svg{width:23px;height:23px;fill:#fff;stroke:none}
   .contact-fab span{font-family:var(--sans);font-weight:500;font-size:.82rem;letter-spacing:.3px;white-space:nowrap}
-  body.theme-light .contact-fab{color:#fff} body.theme-light .contact-fab .av svg{stroke:#b8892f}
-  @media(max-width:760px){.contact-fab{bottom:82px;right:14px;padding:8px;gap:0}.contact-fab span{display:none}.contact-fab .av{width:40px;height:40px}}
+  body.theme-light .contact-fab{color:#fff}
+  @media(max-width:760px){.contact-fab{bottom:82px;right:14px;padding:7px 16px 7px 7px;gap:9px}.contact-fab .av{width:40px;height:40px}}
   /* descrição nas opções do quiz */
   .opt .txt b{font-family:var(--sans);font-weight:500;display:block;line-height:1.3}
   .opt .txt small{display:block;color:var(--muted);font-size:.77rem;margin-top:3px;line-height:1.4}
@@ -256,19 +256,16 @@
   @keyframes flowd{to{stroke-dashoffset:-12}}
   @media(max-width:760px){.flow-arrow{flex:0 0 auto;padding:12px 0}.flow-arrow svg{transform:rotate(90deg)}}
 
-  /* VALORES */
-  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  @media(max-width:900px){.values{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.values{grid-template-columns:1fr}}
-  .valcard{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:32px 28px;transition:.35s;position:relative;overflow:hidden}
-  .valcard::before{content:"";position:absolute;inset:0;background:radial-gradient(300px 160px at 50% -20%,rgba(var(--glowc),.14),transparent);opacity:0;transition:.35s}
-  .valcard:hover{transform:translateY(-6px);border-color:rgba(var(--glowc),.4)}
-  .valcard:hover::before{opacity:1}
-  .valcard .vi{width:46px;height:46px;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1;transition:.35s}
-  .valcard .vi svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-  .valcard:hover .vi{border-color:var(--gold);background:rgba(var(--glowc),.12)}
-  .valcard h3{font-size:1.35rem;font-weight:500;margin-bottom:9px;position:relative;z-index:1}
-  .valcard p{color:var(--muted);font-size:.88rem;position:relative;z-index:1;line-height:1.65}
+  /* VALORES (formato enxuto: 4 pilares) */
+  .vpillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:820px){.vpillars{grid-template-columns:1fr 1fr}}
+  .vp{padding:24px 22px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,var(--panel),var(--panel2));transition:.35s}
+  .vp:hover{transform:translateY(-4px);border-color:rgba(var(--glowc),.4)}
+  .vp .vpi{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:15px;transition:.35s}
+  .vp .vpi svg{width:21px;height:21px;stroke:var(--gold);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+  .vp:hover .vpi{border-color:var(--gold);background:rgba(var(--glowc),.12)}
+  .vp h3{font-size:1.12rem;font-weight:500;margin-bottom:6px}
+  .vp p{color:var(--muted);font-size:.83rem;line-height:1.55}
 
   /* BENTO */
   .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
@@ -490,14 +487,12 @@
     </div>
 
     <!-- VALORES -->
-    <div class="sec-title rv" id="valores"><span class="mono">Como eu trabalho</span><h2>O que você pode esperar de mim?</h2><p class="sub">Antes de qualquer resultado, existe um jeito de cuidar. Este é o meu.</p></div>
-    <div class="values">
-      <div class="valcard hud rv"><div class="vi"><svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4-9-8.2C1.4 8.6 3.2 5.5 6.4 5.5c2 0 3.2 1.2 4.1 2.4l1.5 1.9 1.5-1.9c.9-1.2 2.1-2.4 4.1-2.4 3.2 0 5 3.1 3.4 6.3C18.5 16 12 20 12 20z"/></svg></div><h3>Escuta antes de tudo</h3><p>Ouço a sua história inteira, com calma, antes de falar em qualquer processo.</p></div>
-      <div class="valcard hud rv" style="transition-delay:.06s"><div class="vi"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Sigilo absoluto</h3><p>O que você me conta fica só entre nós, com toda a segurança e conforme a LGPD.</p></div>
-      <div class="valcard hud rv" style="transition-delay:.12s"><div class="vi"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg></div><h3>Sem juridiquês</h3><p>Explico cada etapa de um jeito que você entende de verdade, sem termos difíceis.</p></div>
-      <div class="valcard hud rv" style="transition-delay:.06s"><div class="vi"><svg viewBox="0 0 24 24"><path d="M12 21c-4-3-8-6-8-11a4 4 0 018-1 4 4 0 018 1c0 5-4 8-8 11z"/><path d="M9 12h6"/></svg></div><h3>Presença de verdade</h3><p>Você nunca fica sozinha. Eu respondo, acompanho e caminho ao seu lado.</p></div>
-      <div class="valcard hud rv" style="transition-delay:.12s"><div class="vi"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg></div><h3>Foco na mulher</h3><p>Um olhar dedicado a você, aos seus filhos e à sua família, porque tudo se conecta.</p></div>
-      <div class="valcard hud rv" style="transition-delay:.18s"><div class="vi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div><h3>Transparência</h3><p>Você acompanha cada etapa, prazo e condição, sem surpresas do início ao fim.</p></div>
+    <div class="sec-title rv" id="valores"><span class="mono">Como eu trabalho</span><h2>O que você pode esperar de mim?</h2></div>
+    <div class="vpillars">
+      <div class="vp hud rv"><div class="vpi"><svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4-9-8.2C1.4 8.6 3.2 5.5 6.4 5.5c2 0 3.2 1.2 4.1 2.4l1.5 1.9 1.5-1.9c.9-1.2 2.1-2.4 4.1-2.4 3.2 0 5 3.1 3.4 6.3C18.5 16 12 20 12 20z"/></svg></div><h3>Escuta antes de tudo</h3><p>Ouço a sua história inteira, com calma.</p></div>
+      <div class="vp hud rv" style="transition-delay:.06s"><div class="vpi"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Sigilo absoluto</h3><p>Fica só entre nós, conforme a LGPD.</p></div>
+      <div class="vp hud rv" style="transition-delay:.12s"><div class="vpi"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg></div><h3>Sem juridiquês</h3><p>Explico tudo de um jeito que você entende.</p></div>
+      <div class="vp hud rv" style="transition-delay:.18s"><div class="vpi"><svg viewBox="0 0 24 24"><path d="M12 21c-4-3-8-6-8-11a4 4 0 018-1 4 4 0 018 1c0 5-4 8-8 11z"/><path d="M9 12h6"/></svg></div><h3>Presença de verdade</h3><p>Você nunca fica sozinha.</p></div>
     </div>
 
     <div class="bento">
@@ -557,9 +552,9 @@
   <div class="in-body"><div class="card" id="stepHost"></div></div>
 </div>
 
-<div class="contact-fab" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')" aria-label="Falar com a advogada" role="button">
-  <span class="av"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.2"/><path d="M8.7 6.4C8.7 4.3 10.1 3 12 3s3.3 1.3 3.3 3.4"/><path d="M8.9 8.6C8.2 9.3 7.9 10.3 7.9 11.4M15.1 8.6c.7.7 1 1.7 1 2.8"/><path d="M5.5 20.5c0-3.6 2.9-6.3 6.5-6.3s6.5 2.7 6.5 6.3"/></svg></span>
-  <span>Fale comigo</span>
+<div class="contact-fab" onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')" aria-label="Falar no WhatsApp" role="button">
+  <span class="av"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></span>
+  <span>WhatsApp</span>
 </div>
 
 <script>
