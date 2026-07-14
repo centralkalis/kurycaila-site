@@ -276,6 +276,7 @@
     .bento .bx:nth-child(even).rv{transform:translateX(32px) scale(.97)}
     .bento .bx.rv.in,.bento .bx:nth-child(even).rv.in{transform:none}}
   .bx{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;overflow:hidden}
+  .bento .bx.rv{transition:opacity 1.5s cubic-bezier(.19,1,.22,1),transform 1.5s cubic-bezier(.19,1,.22,1)}
   .bx .mono{margin-bottom:14px;display:block}
   .bx h3{font-size:1.6rem;font-weight:500;margin-bottom:10px}
   .bx p{color:var(--muted);font-size:.9rem;line-height:1.7}
@@ -932,7 +933,10 @@ function bindMagnetic(){document.querySelectorAll('.mag').forEach(b=>{if(b._m)re
   b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.3}px)`;});
   b.addEventListener('mouseleave',()=>b.style.transform='');});}
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.12});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv').forEach(el=>{if(!el.closest('.bento'))io.observe(el);});
+/* Sobre: reveal mais tardio (e mais lento no CSS) pra dar pra ver o deslize */
+const ioSobre=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ioSobre.unobserve(x.target);}}),{threshold:.28,rootMargin:'0px 0px -16% 0px'});
+document.querySelectorAll('.bento .rv').forEach(el=>ioSobre.observe(el));
 function setTheme(t){document.body.classList.remove('theme-gold','theme-mid','theme-emerald','theme-wine','theme-light');document.body.classList.add('theme-'+t);buildMap();}
 function toggleTheme(){setTheme(document.body.classList.contains('theme-light')?'wine':'light');}
 document.body.classList.add('theme-wine');
