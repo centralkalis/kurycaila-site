@@ -310,6 +310,16 @@
   footer p{margin-bottom:7px;font-weight:300;font-size:.86rem}
   footer a:hover{color:var(--gold)}
   .disc{border-top:1px solid var(--line);padding-top:22px;font-size:.71rem;color:var(--faint);line-height:1.7}
+  /* Assinatura Kalis (tecnologia por Kalis) — logo PULSE, reutilizável */
+  .kalis-sig{display:inline-flex;align-items:center;gap:9px;text-decoration:none;opacity:.72;transition:opacity .3s}
+  .kalis-sig:hover{opacity:1}
+  .kalis-sig .ks-label{font-family:var(--mono);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  .kalis-sig .ks-word{display:inline-flex;align-items:center;line-height:1;font-family:var(--sans);font-weight:800;font-size:1rem;letter-spacing:1px;text-transform:uppercase;color:var(--ivory)}
+  .kalis-sig .ks-bar{display:inline-block;width:.2em;height:.74em;margin:0 .09em;border-radius:1em;background:rgba(204,255,0,.18);border:.04em solid rgba(204,255,0,.55);position:relative;overflow:hidden}
+  .kalis-sig .ks-bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;background:#ccff00;border-radius:1em;box-shadow:0 0 8px rgba(204,255,0,.8);animation:kalisPulse 2.6s ease-in-out infinite}
+  @keyframes kalisPulse{0%,100%{height:45%}50%{height:78%}}
+  .kalis-sig:hover .ks-word{color:var(--gold)}
+  footer .kalis-sig{margin-top:22px}
 
   /* TRIAGEM */
   #intake{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;overflow:hidden;
@@ -534,6 +544,12 @@
         <div><h4>Contato</h4><p><a onclick="goWhatsApp('Olá, Dra. Kury Caila. Gostaria de agendar uma consulta.')">WhatsApp</a></p><p><a href="mailto:contato@kurycaila.com.br">contato@kurycaila.com.br</a></p><p>São Paulo, SP. On-line para todo o Brasil.</p><p>OAB/SP nº 520.927</p></div>
       </div>
       <div class="disc">Este site tem caráter meramente informativo, em conformidade com o Provimento nº 205/2021 e o Código de Ética e Disciplina da OAB. O conteúdo e a orientação inicial não constituem oferta de serviços, captação de clientela, promessa de resultado nem análise jurídica de casos específicos, o que ocorre apenas em consulta individual. Os dados são tratados com sigilo e conforme a LGPD. © <span id="year"></span> Kury Caila, Advocacia.</div>
+      <div style="text-align:center;margin-top:26px">
+        <a class="kalis-sig" href="https://instagram.com/kalis.hub" target="_blank" rel="noopener" aria-label="Tecnologia por Kalis">
+          <span class="ks-label">tecnologia por</span>
+          <span class="ks-word">KAL<i class="ks-bar"></i>S</span>
+        </a>
+      </div>
     </footer>
   </div>
 </main>
@@ -884,7 +900,13 @@ function finish(){
       <p>É uma situação que merece atenção. Com uma boa análise do seu caso, dá para enxergar os caminhos possíveis e buscar, com estratégia e cuidado, a melhor solução para você. Sem promessas, mas com dedicação total.</p>
       <div class="rec">${IC.chat}<span>Ao continuar, o WhatsApp já abre com o resumo da sua situação. Assim eu chego preparada para te ouvir e já falamos dos próximos passos.</span></div></div>
     <div class="step-actions"><a class="btn btn-wa mag" onclick="goWhatsApp(decodeURIComponent('${wa}'))">Falar com a Dra. Kury Caila</a>
-      <a class="btn btn-line mag" onclick="closeTriage()">Voltar ao início</a></div></div>`;
+      <a class="btn btn-line mag" onclick="closeTriage()">Voltar ao início</a></div>
+    <div style="text-align:center;margin-top:30px">
+      <a class="kalis-sig" href="https://instagram.com/kalis.hub" target="_blank" rel="noopener" aria-label="Tecnologia por Kalis">
+        <span class="ks-label">tecnologia por</span>
+        <span class="ks-word">KAL<i class="ks-bar"></i>S</span>
+      </a>
+    </div></div>`;
   bindMagnetic();
 }
 function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
